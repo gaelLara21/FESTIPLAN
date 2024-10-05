@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+
+<body>
+    <!-- Empieza el slider-->
+    <div class="slider">
+        <ul>
+          <li><img src="{{ url_for('static', filename='/img/evento1.png') }}" alt="evento 1"></li>
+          <li><img src="{{ url_for('static', filename='/img/evento2.png') }}" alt="evento 2"></li>
+          <li><img src="{{ url_for('static', filename='/img/evento3.png') }}" alt="evento 3"></li>
+        </ul>
+    </div>
+    <!-- Termina Slider -->
+    <div class="container-index"></div>
+    
+    </body>
+    
+
+{% endblock %}

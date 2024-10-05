@@ -1,0 +1,194 @@
+body{
+    background-image: linear-gradient(to right, #000000, #044b9c);
+
+}
+
+.a{
+    color: #000000;
+}
+
+/*footer*/
+.footer-menu ul {
+    margin: 0px;
+    padding: 0px;
+}
+.container-footer {
+    max-width: 1140px;
+}
+.copyright-area{
+  background: #000000;
+  padding: 25px 0;
+}
+.copyright-text p {
+  margin: 0;
+  font-size: 14px;
+  color: #878787;
+}
+.copyright-text p a{
+  color: #ffffff;
+  text-decoration: none;
+}
+.footer-menu li {
+  display: inline-block;
+  margin-left: 20px;
+}
+.footer-menu li:hover a{
+  color: #ff5e14;
+}
+.footer-menu li a {
+  font-size: 14px;
+  color: #878787;
+  text-decoration: none;
+}
+.row-footer {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+.text-lg-left {
+    text-align: left !important;
+}
+.text-right {
+    text-align: right !important;
+}
+.col-xl-6 {
+    -ms-flex: 0 0 50%;
+    flex: 0 0 50%;
+    max-width: 50%;
+}
+.d-lg-block {
+    display: block !important;
+}
+
+.col-xl-6{
+	position: relative;
+    width: 100%;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+.container-footer {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+a{
+    text-decoration: black;
+    
+}
+
+/*Estilos del Navbar*/
+.custom-navbar {
+    background-image: linear-gradient(to right, #292725, #292725);
+  }
+  
+  .custom-navbar .nav-link,
+  .custom-navbar .navbar-brand,
+  .custom-navbar .navbar-toggler-icon {
+    color: white;
+  }
+  .form-control {
+    background-color: #5c009900; 
+    color: #ffffff; 
+    text-decoration: rgb(255, 255, 255);
+    border: 2px solid #ffffff;
+    border-radius: 5px 0 0 5px; 
+}
+
+.btn-outline-success {
+    background-color: transparent; 
+    border-color: #ffffff; 
+    color: #ffffff; 
+    padding: 10px;
+    display: flex; 
+    align-items: center; 
+    border-radius: 0 5px 5px 0;
+}
+
+.btn-outline-success:hover {
+    background-color: rgb(255, 255, 255);
+    color: #ffffff; 
+}
+
+.btn-outline-success:focus {
+    background-color: transparent; 
+    outline: none; 
+}
+
+.fa-search {
+    font-size: 1.2em; 
+}
+
+.form-control:focus {
+    background-color: transparent; 
+    outline: none; 
+}
+.navbar-brand {
+    font-family: "Bebas Neue", sans-serif;
+    font-weight: 250;
+    font-size: 46px;
+
+  }
+  
+  .nav-item{
+      font-family: "Bebas Neue", sans-serif;
+      font-weight: 1500;
+      font-size: 18px;
+  }
+/*Estilos del botón "Crea tu evento"*/
+ .btn-primary {
+    background-color: #00000000;
+    border-radius: 6%;
+    border-color: #ffffff;
+    border-style: double;
+}
+.btn-primary:hover {
+    background-color: #ff7b00; 
+    color: #000000;
+    border-color: #000000; 
+}
+
+/*Diseño Slider*/
+.slider{
+    padding-top: 0rem;
+    width: 100%;
+    margin: auto;
+    overflow: hidden;
+}
+.slider ul{
+    display:flex;
+    padding: 0;
+    width: 300%;
+    animation: cambio 20s infinite;
+    animation-direction: alternate;
+    animation-timing-function:linear;
+}
+.slider li{
+    list-style: none;
+    width: 100%;
+}
+.slider img{
+    width: 100%;
+}
+
+@keyframes cambio{
+    0%{margin-left: 0;}
+    30%{margin-left:0;}
+
+    35%{margin-left: -100%;}
+    65%{margin-left: -100%;}
+
+    70%{margin-left: -200%;}
+    100%{margin-left: -200%;}
+}
+
