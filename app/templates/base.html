@@ -19,7 +19,7 @@
             <nav class="menu">
                 <a href="{{ url_for('contacto')}}" id="btn-acerca-de">Contacto</a>
                 <a href="{{ url_for('nosotros')}}" id="btn-menu">Nosotros</a>
-                <a href="#" id="btn-galeria">Galeria</a>
+                <a href="{{ url_for('galeria')}}" id="btn-galeria">Galeria</a>
             </nav>
 
             <div class="textos">
@@ -44,7 +44,7 @@
                             <ul>
                                 <li><a href="{{ url_for('contacto')}}">Contacto</a></li>
                                 <li><a href="{{ url_for('nosotros')}}">Nosotros</a></li>
-                                <li><a href="">Galeria</a></li>
+                                <li><a href="{{ url_for('galeria')}}">Galeria</a></li>
                                 <li><a href="{{ url_for('terminos')}}">Terminos y Condiciones</a></li>
                             </ul>
                         </div>
