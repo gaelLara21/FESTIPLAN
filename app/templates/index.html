@@ -3,25 +3,116 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-
 <section class="main">
         <div id="carouselExample" class="carousel slide">
-
                 <div class="carousel-inner">
                   <div class="carousel-item active">
-                        <a href=""></a>
-                    <img src="{{ url_for('static', filename='img/evento1.png') }}" class="d-block w-100" alt="...">
+                    <div class="card-container">
+                      <a href="" class="card-link">
+                        <div class="card">
+                          <div class="icon-circle">
+                            <span class="icon">🎸</span>
+                          </div>
+                          <div class="category">Conciertos</div>
+                          <p class="description">Experiencias musicales inolvidables.</p>
+                        </div>
+                      </a>
+                      <a href="" class="card-link">
+                        <div class="card">
+                          <div class="icon-circle">
+                            <span class="icon">🎉</span>
+                          </div>
+                          <div class="category">Festivales</div>
+                          <p class="description">Eventos multitudinarios de música y cultura.</p>
+                        </div>
+                      </a>
+                      <a href="" class="card-link">
+                        <div class="card">
+                          <div class="icon-circle">
+                            <span class="icon">🏀</span>
+                          </div>
+                          <div class="category">Deportes</div>
+                          <p class="description">Competiciones y encuentros deportivos.</p>
+                        </div>
+                      </a>
+                    </div>
                   </div>
                   <div class="carousel-item">
-                        <a href=""></a>
-                    <img src="{{ url_for('static', filename='img/evento2.png') }}" class="d-block w-100" alt="...">
+                    <div class="card-container">
+                      <a href="" class="card-link">
+                        <div class="card">
+                          <div class="icon-circle">
+                            <span class="icon">🎭</span>
+                          </div>
+                          <div class="category">Teatro</div>
+                          <p class="description">Obras teatrales y espectáculos.</p>
+                        </div>
+                      </a>
+                      <a href="" class="card-link">
+                        <div class="card">
+                          <div class="icon-circle">
+                            <span class="icon">🎤</span>
+                          </div>
+                          <div class="category">Conferencias</div>
+                          <p class="description">Charlas y eventos corporativos.</p>
+                        </div>
+                      </a>
+                      <a href="" class="card-link">
+                        <div class="card">
+                          <div class="icon-circle">
+                            <span class="icon">🖼️</span>
+                          </div>
+                          <div class="category">Exposiciones</div>
+                          <p class="description">Muestras de arte y cultura.</p>
+                        </div>
+                      </a>
+                    </div>
                   </div>
                   <div class="carousel-item">
-                        <a href="{{ url_for('nosotros') }}">
-                    <img src="{{ url_for('static', filename='img/evento3.png') }}" class="d-block w-100" alt="...">
+                    <div class="card-container">
+                      <a href="" class="card-link">
+                        <div class="card">
+                          <div class="icon-circle">
+                            <span class="icon">🎡</span>
+                          </div>
+                          <div class="category">Ferias</div>
+                          <p class="description">Eventos comerciales y de entretenimiento.</p>
+                        </div>
+                      </a>
+                      <a href="" class="card-link">
+                        <div class="card">
+                          <div class="icon-circle">
+                            <span class="icon">🎬</span>
+                          </div>
+                          <div class="category">Cine</div>
+                          <p class="description">Estrenos y festivales de cine.</p>
+                        </div>
+                      </a>
+                      <a href="" class="card-link">
+                        <div class="card">
+                          <div class="icon-circle">
+                            <span class="icon">🍽️</span>
+                          </div>
+                          <div class="category">Gastronomía</div>
+                          <p class="description">Festivales y eventos culinarios.</p>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <div class="card-container">
+                      <a href="" class="card-link">
+                        <div class="card">
+                          <div class="icon-circle">
+                            <span class="icon">🌙</span>
+                          </div>
+                          <div class="category">Vida Nocturna</div>
+                          <p class="description">Fiestas y eventos nocturnos.</p>
+                        </div>
+                      </a>
+                    </div>
                   </div>
                 </div>
-
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
                   <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                   <span class="visually-hidden">Previous</span>
@@ -30,8 +121,6 @@
                   <span class="carousel-control-next-icon" aria-hidden="true"></span>
                   <span class="visually-hidden">Next</span>
                 </button>
-
               </div>
-</section>   
-
+        </section> 
 {% endblock %}

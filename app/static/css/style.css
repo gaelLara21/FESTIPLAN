@@ -186,9 +186,10 @@ header {
 }
 
 /* ----- ----- MAIN ----- -----*/
-.main {
-    background: url('../img/bg-textura.png');
-    background-repeat: repeat;
+
+.main .h1{
+        text-align: center;
+        text-decoration: aliceblue;
 }
 
 .main .acerca-de .contenedor {
@@ -364,3 +365,83 @@ header {
     width: 100%;
     max-height: 600px;
 }
+
+.carousel-inner {
+    padding: 1em;
+  }
+  
+  .card-container {
+    display: flex;
+    justify-content: center;
+    gap: 1em;
+    padding: 1em 0;
+  }
+  
+  .card-link {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 200px;
+    padding: 1em;
+    text-align: center;
+    transition: transform 0.3s ease;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .icon-circle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 0.5em;
+  }
+  
+  .icon {
+    font-size: 30px;
+  }
+  
+  .category {
+    font-weight: bold;
+    margin-bottom: 0.5em;
+  }
+  
+  .description {
+    font-size: 12px;
+  }
+  
+  .carousel-control-prev,
+  .carousel-control-next {
+    width: 5%;
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+  
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    padding: 10px;
+  }
+  
+  @media (max-width: 768px) {
+    .card-container {
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .card {
+      width: 80%;
+      max-width: 300px;
+      margin-bottom: 1em;
+    }
+  }
