@@ -1,0 +1,73 @@
+{% extends 'baseExtend.html' %}
+
+{% block title %}Terminos y Condiciones{% endblock %}
+
+{% block content %}
+
+<main>
+    <div class="container">
+        <div class="container">
+            <div class="columna-terminos">
+                <h2 class="titulo-terminos">Términos y Condiciones</h2>
+        
+                <p class="texto-terminos">
+                    Bienvenido a Festy Plan. Estos Términos y Condiciones regulan el acceso y uso de nuestra plataforma dedicada a la creación, gestión, y venta de eventos, donde podrás encontrar una amplia variedad de experiencias diseñadas para hacer que cada ocasión sea inolvidable.
+                </p>
+        
+                <h3 class="subtitulo-terminos">1. Uso de la Plataforma</h3>
+                <p class="texto-terminos">
+                    Al utilizar Festy Plan, aceptas cumplir con todos los términos, condiciones, y políticas que aquí se detallan. Festy Plan se reserva el derecho de actualizar estos términos en cualquier momento. Es responsabilidad del usuario revisar periódicamente los términos para estar informado de los cambios.
+                </p>
+        
+                <h3 class="subtitulo-terminos">2. Creación y Venta de Eventos</h3>
+                <p class="texto-terminos">
+                    Festy Plan permite a los organizadores crear eventos y vender entradas a través de nuestra plataforma. Al utilizar esta función, el organizador se compromete a ofrecer información precisa y completa sobre el evento. Festy Plan no se hace responsable por la información errónea proporcionada por los organizadores.
+                </p>
+        
+                <h3 class="subtitulo-terminos">3. Compra de Entradas</h3>
+                <p class="texto-terminos">
+                    Los usuarios pueden adquirir entradas para eventos mediante nuestra plataforma. Una vez realizada la compra, no se permiten devoluciones ni cambios, a menos que el evento sea cancelado o pospuesto. Las políticas de reembolso se regirán por las condiciones específicas de cada evento.
+                </p>
+        
+                <h3 class="subtitulo-terminos">4. Cancelación y Reembolsos</h3>
+                <p class="texto-terminos">
+                    En caso de cancelación de un evento, el organizador será responsable de gestionar los reembolsos correspondientes. Festy Plan facilitará el proceso de reembolso, pero no será responsable de los reembolsos, salvo que se indique expresamente lo contrario. Para más detalles sobre el proceso de reembolso, por favor contacta con nuestro equipo de atención al cliente.
+                </p>
+        
+                <h3 class="subtitulo-terminos">5. Responsabilidad</h3>
+                <p class="texto-terminos">
+                    Festy Plan no es responsable de la organización de los eventos ni de las condiciones de los recintos donde se celebran. La responsabilidad recae en el organizador del evento. Festy Plan solo facilita la plataforma de venta y gestión de tickets. Cualquier inconveniente relacionado con el evento en sí debe ser dirigido al organizador.
+                </p>
+        
+                <h3 class="subtitulo-terminos">6. Privacidad y Seguridad</h3>
+                <p class="texto-terminos">
+                    En Festy Plan, valoramos tu privacidad. La información personal que recopilamos se utiliza únicamente para procesar tus pedidos y mejorar tu experiencia. Consulta nuestra <a href="{{ url_for('terminos')}}" class="enlace-terminos">Política de Privacidad</a> para más información sobre cómo protegemos y utilizamos tus datos.
+                </p>
+        
+                <h3 class="subtitulo-terminos">7. Propiedad Intelectual</h3>
+                <p class="texto-terminos">
+                    Todos los derechos de autor, marcas comerciales y otros derechos de propiedad intelectual en el contenido de la plataforma Festy Plan son propiedad de la empresa o de sus licenciantes. Los usuarios no están autorizados a utilizar dicho contenido sin el consentimiento previo y por escrito de Festy Plan.
+                </p>
+        
+                <h3 class="subtitulo-terminos">8. Modificaciones a los Términos y Condiciones</h3>
+                <p class="texto-terminos">
+                    Festy Plan se reserva el derecho de modificar estos Términos y Condiciones en cualquier momento. Las modificaciones serán efectivas una vez publicadas en nuestro sitio web. Al continuar utilizando nuestra plataforma, aceptas las modificaciones.
+                </p>
+        
+                <h3 class="subtitulo-terminos">9. Contacto</h3>
+                <p class="texto-terminos">
+                    Para cualquier duda o comentario acerca de estos Términos y Condiciones, no dudes en ponerte en contacto con nuestro equipo a través de nuestro <a href="{{ url_for('contacto')}}" class="enlace-terminos">Formulario de Contacto</a> en la plataforma.
+                </p>
+        
+                <p class="texto-terminos">
+                    Al utilizar Festy Plan, aceptas todos los términos y condiciones aquí establecidos. ¡Esperamos que disfrutes de las experiencias únicas que tenemos para ofrecerte!
+                </p>
+            </div>
+        </div>
+        
+</main>
+
+
+<script src="{{ url_for('static', filename='js/jquery-3.5.1.min.js') }}"></script>
+
+{% endblock %}

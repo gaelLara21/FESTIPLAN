@@ -1,0 +1,293 @@
+body{
+    background-image: linear-gradient(to right, #000000, #044b9c);
+}
+.a{
+    color: #000000;
+}
+
+/*footer*/
+.footer-menu ul {
+    margin: 0px;
+    padding: 0px;
+}
+.container-footer {
+    max-width: 1140px;
+}
+.copyright-area{
+  background: #000000;
+  padding: 25px 0;
+}
+.copyright-text p {
+  margin: 0;
+  font-size: 14px;
+  color: #878787;
+}
+.copyright-text p a{
+  color: #ffffff;
+  text-decoration: none;
+}
+.footer-menu li {
+  display: inline-block;
+  margin-left: 20px;
+}
+.footer-menu li:hover a{
+  color: #044b9c;
+}
+.footer-menu li a {
+  font-size: 14px;
+  color: #878787;
+  text-decoration: none;
+}
+.row-footer {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+.text-lg-left {
+    text-align: left !important;
+}
+.text-right {
+    text-align: right !important;
+}
+.col-xl-6 {
+    -ms-flex: 0 0 50%;
+    flex: 0 0 50%;
+    max-width: 50%;
+}
+.d-lg-block {
+    display: block !important;
+}
+.col-xl-6{
+	position: relative;
+    width: 100%;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+.container-footer {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+a{
+    text-decoration: black;
+    
+}
+/*Estilos del Navbar*/
+.custom-navbar {
+    background-image: linear-gradient(to right, #292725, #292725);
+  }
+  
+  .custom-navbar .nav-link,
+  .custom-navbar .navbar-brand,
+  .custom-navbar .navbar-toggler-icon {
+    color: white;
+  }
+  .form-control {
+    background-color: #5c009900; 
+    color: #ffffff; 
+    text-decoration: rgb(255, 255, 255);
+    border: 2px solid #ffffff;
+    border-radius: 5px 0 0 5px; 
+}
+.btn-outline-success {
+    background-color: transparent; 
+    border-color: #ffffff; 
+    color: #ffffff; 
+    padding: 10px;
+    display: flex; 
+    align-items: center; 
+    border-radius: 0 5px 5px 0;
+}
+.btn-outline-success:hover {
+    background-color: rgb(255, 255, 255);
+    color: #ffffff; 
+}
+.btn-outline-success:focus {
+    background-color: transparent; 
+    outline: none; 
+}
+.fa-search {
+    font-size: 1.2em; 
+}
+.form-control:focus {
+    background-color: transparent; 
+    outline: none; 
+}
+.navbar-brand {
+    font-family: "Open Sans", Arial, sans-serif;
+    font-weight: 250;
+    font-size: 46px;
+  }
+  
+  .nav-item{
+      font-family: "Open Sans", Arial, sans-serif;
+      font-weight: 1500;
+      font-size: 18px;
+  }
+
+ /* Estilos generales para el formulario de contacto */
+.container-contacto {
+    width: 100%;
+    height: 100vh; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.container-contacto video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; 
+    object-fit: cover;
+    z-index: -1;
+}
+
+form {
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 40px;
+    border-radius: 10px;
+    text-align: center;
+    color: #fff;
+    width: 100%;
+    max-width: 400px;
+    margin-top: 50px; 
+    margin-bottom: 25px; 
+}
+
+form h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+form input,
+form textarea {
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+form textarea {
+    resize: none;
+    height: 100px;
+}
+
+form #button-contacto {
+    background-color: #ffc107;
+    color: #000;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+form #button-contacto:hover {
+    background-color: #ffb200;
+}
+
+
+/* Contenedor principal */
+.container {
+    width: 100%;
+    padding: 20px;
+    position: relative;
+}
+
+/* Columna principal */
+.columna {
+    width: 100%;
+    margin-bottom: 20px;
+    color: white;
+    padding: 30px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    position: relative;
+    box-sizing: border-box;
+}
+
+/* Estilos para el título */
+.columna h2 {
+    font-size: 40px;
+    margin-top: 0;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Párrafos */
+.columna p {
+    text-align: justify;
+    margin-bottom: 15px; 
+    line-height: 1.6; 
+    font-size: 16px;
+    margin-left: 20px; 
+    margin-right: 20px; 
+}
+
+/* Imagen en la esquina superior derecha */
+.columna img {
+    width: 200px;
+    height: auto;
+    position: absolute;
+    top: 00px;
+    right: -110px;
+    z-index: 1;
+}
+/* Estilos para los términos y condiciones */
+.columna-terminos {
+    width: 100%;
+    margin-bottom: 20px;
+    color: white;
+    padding: 40px;
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 10px;
+    position: relative;
+}
+
+/* Estilo para el título */
+.titulo-terminos {
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+/* Estilo para los subtítulos */
+.subtitulo-terminos {
+    font-size: 22px;
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
+
+/* Estilo para los párrafos */
+.texto-terminos {
+    text-align: justify;
+    font-size: 16px;
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+/* Estilo para los enlaces */
+.enlace-terminos {
+    color: #1e90ff;
+    text-decoration: underline;
+}
+
+.enlace-terminos:hover {
+    color: #f5a623;
+}

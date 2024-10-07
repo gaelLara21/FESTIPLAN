@@ -51,7 +51,7 @@ body {
   margin-left: 20px;
 }
 .footer-menu li:hover a{
-  color: #ff5e14;
+  color: #044b9c;
 }
 .footer-menu li a {
   font-size: 14px;
@@ -107,7 +107,6 @@ a{
 
 /* ----- ----- HEADER ----- ----- */
 
-/* Estilo para el header con video de fondo */
 header {
     width: 100%;
     position: relative;
