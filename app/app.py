@@ -26,7 +26,7 @@ def venta():
 ##################### Terminan Rutas Conectadas a una base de Datos ###############################
 
 
-###################### Rutas Ordinarias #############################################3
+###################### Rutas Ordinarias ##################################################
 @app.route('/')
 def index():
     return render_template('index.html')
