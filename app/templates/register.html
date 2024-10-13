@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/1ab94d0eba.js" crossorigin="anonymous"></script>
+    <title>Festy Plan |  {% block title %}{% endblock %}</title>
+    <link rel="icon" href="{{ url_for('static', filename='img/icono.png') }}" type="image/x-icon">
+    <link href="{{ url_for('static', filename='css/register.css') }}" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <video autoplay muted loop id="bg-video">
+        <source src="{{ url_for('static', filename='img/evento3.mp4') }}" type="video/mp4">
+        Tu navegador no soporta la etiqueta de video.
+    </video>
+    {% block content %}
+    {% endblock %}
+    <script src="{{ url_for('static', filename='js/jquery-3.5.1.min.js') }}"></script>
+</body>
+</html>
