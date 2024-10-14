@@ -127,25 +127,24 @@ header {
 
 /* Contenedor del contenido */
 header .contenedor {
-    position: relative;
-    height: 100%;
-    z-index: 1; /* El contenido queda encima del video */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-/* Menú */
 header .menu {
+    display: flex;
+    justify-content: flex-end; 
+    gap: 40px; 
     width: 100%;
-    text-align: right;
+    margin-top: 45px; 
 }
 
 header .menu a {
     color: #fff;
     font-size: 20px;
     font-weight: 300;
-    display: inline-block;
-    margin: 40px 20px;
     text-decoration: none;
-    position: relative;
 }
 
 header .menu a:hover {
@@ -448,6 +447,101 @@ header {
     }
   }
 
-  /* Estilos del Login y SignUp */
+/* Estilos para el menú desplegable */
+.menu-icon {
+    cursor: pointer;
+    padding: 10px;
+    position: absolute;
+    right: 19px;
+    left: 24px; 
+    top: 15px; 
+    z-index: 1000;
+}
 
- 
+.menu-icon div {
+    width: 35px;
+    height: 5px;
+    background-color: white;
+    margin: 6px 0;
+    transition: 0.4s;
+}
+
+.menu-icon.active div:nth-child(1) {
+    transform: rotate(-45deg) translate(-9px, 6px);
+}
+
+.menu-icon.active div:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-icon.active div:nth-child(3) {
+    transform: rotate(45deg) translate(-8px, -8px);
+}
+
+/* Estilos del menú desplegable */
+.menu-desplegable {
+    position: fixed;
+    top: 0;
+    left: -300px;
+    height: 100%;
+    width: 250px;
+    background: linear-gradient(45deg, #201e1e94,   #201e1e94,   #201e1e94,   #201e1e94);
+    padding: 70px 20px 20px 30px; /* Espacio superior para evitar que se sobreponga al icono */
+    transition: 0.3s;
+    box-shadow: 5px 0 15px rgba(0,0,0,0.1);
+    z-index: 999;
+}
+
+.menu-desplegable.active {
+    left: 0;
+}
+
+.menu-desplegable a {
+    display: flex; /* Cambiado a flex para alinear icono y texto */
+    align-items: center; /* Alinear verticalmente los elementos */
+    color: #ffffff; /* Color del texto */
+    text-decoration: none; /* Sin subrayado */
+    font-size: 18; /* Tamaño de fuente */
+    margin: 20px 0; /* Margen entre enlaces */
+}
+
+.menu-video {
+    width: 100%; /* Asegúrate de que el video ocupe el ancho del menú */
+    height: auto; /* Altura automática para mantener la proporción */
+    margin-bottom: 20px; /* Espacio inferior para separar el video del contenido */
+}
+
+.menu-desplegable a i {
+    margin-right: 15px; /* Espacio entre el icono y el texto */
+    color: #ffffff; /* Color del icono */
+    font-size: 20px; /* Tamaño del icono, ajusta según sea necesario */
+}
+.menu-desplegable .login-btn {
+
+    background-color: #5f0606;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    text-decoration: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+
+/* Estilos para pantallas grandes (PC) */
+@media screen and (min-width: 769px) {
+    header .menu {
+        display: flex;
+    }
+}
+
+/* Estilos para pantallas pequeñas (móvil) */
+@media screen and (max-width: 768px) {
+    header .menu {
+        display: none;
+    }
+}

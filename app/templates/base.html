@@ -13,24 +13,45 @@
     <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" type="text/css">
   </head>
   <body>
-    <header>
-        <video autoplay muted loop id="bg-video">
-            <source src="{{ url_for('static', filename='img/evento2.mp4') }}" type="video/mp4">
-            Tu navegador no soporta la etiqueta de video.
-        </video>
-        <div class="contenedor">
-            <nav class="menu">
-                <a href="{{ url_for('contacto')}}" id="btn-acerca-de">Contacto</a>
-                <a href="{{ url_for('nosotros')}}" id="btn-menu">Nosotros</a>
-                <a href="{{ url_for('galeria')}}" id="btn-galeria">Galeria</a>
-            </nav>
+    <div class="menu-icon" onclick="toggleMenu()">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
 
-            <div class="textos">
-                <h1 class="nombre">Festy<span> Plan</span></h1>
-                <h3>¡Cada evento es un sueño!</h3>
-            </div>
-        </div>
-    </header>
+   <!-- Botón de icono de menú para despliegue -->
+<div class="menu-icon" onclick="toggleMenu()">
+  <div></div>
+  <div></div>
+  <div></div>
+</div>
+<div class="menu-desplegable" id="menu">
+  <a href="{{ url_for('contacto')}}" id="btn-acerca-de"><i class="fas fa-envelope"></i> Contacto</a>
+  <a href="{{ url_for('nosotros')}}" id="btn-menu"><i class="fas fa-users"></i> Nosotros</a>
+  <a href="{{ url_for('galeria')}}" id="btn-galeria"><i class="fas fa-images"></i> Galería</a>
+  <a href="{{ url_for('terminos')}}"><i class="fas fa-file-contract"></i> Términos y Condiciones</a>
+  <a href="{{ url_for('login') }}" class="login-btn">
+    <i class="fas fa-sign-in-alt"></i> Iniciar Sesión
+</a>
+</div>
+<header>
+  <video autoplay muted loop id="bg-video">
+    <source src="{{ url_for('static', filename='img/evento2.mp4') }}" type="video/mp4">
+    Tu navegador no soporta la etiqueta de video.
+  </video>
+  <div class="contenedor">
+    <nav class="menu menu-derecha">
+      <a href="{{ url_for('contacto')}}" id="btn-acerca-de">Contacto</a>
+      <a href="{{ url_for('nosotros')}}" id="btn-menu">Nosotros</a>
+      <a href="{{ url_for('galeria')}}" id="btn-galeria">Galeria</a>
+    </nav>
+    <div class="textos">
+      <h1 class="nombre">Festy<span> Plan</span></h1>
+      <h3>¡Cada evento es un sueño!</h3>
+    </div>
+  </div>
+</header>
+    
     
     {% block content %}
     {% endblock %}
@@ -74,6 +95,11 @@
                 console.log('Error al registrar el Service Worker:', err);
               });
           });
+        }
+
+        // Función para alternar el menú desplegable
+        function toggleMenu() {
+          document.querySelector('.menu-desplegable').classList.toggle('active');
         }
       </script>
     </body>
