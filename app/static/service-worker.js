@@ -14,7 +14,6 @@ const urlsToCache = [
   '/qr',
   '/static/css/styles.css',
   '/static/css/style.css',
-  '/static/css/body.css',
   '/static/css/register.css',
   '/static/js/jquery-3.5.1.min.js',
   '/static/icons/icon-192x192.png',
