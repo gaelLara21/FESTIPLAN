@@ -13,22 +13,32 @@
     <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
   </head>
   <body>
+  
     <div class="menu-icon" onclick="toggleMenu()">
       <div></div>
       <div></div>
       <div></div>
     </div>
-
+    
     <div class="menu-desplegable" id="menu">
-      <a href="{{ url_for('contacto')}}"><i class="fas fa-envelope"></i> Contacto</a>
-      <a href="{{ url_for('nosotros')}}"><i class="fas fa-users"></i> Nosotros</a>
-      <a href="{{ url_for('galeria')}}"><i class="fas fa-images"></i> Galería</a>
-      <a href="{{ url_for('terminos')}}"><i class="fas fa-file-contract"></i> Términos y Condiciones</a>
-      <a href="#" class="login-btn" data-bs-toggle="modal" data-bs-target="#loginModal">
-        <i class="fas fa-sign-in-alt"></i> Iniciar Sesión
+      {% if session['user_id'] %}
+      <span class="username">{{ session['name'] in session and session['name'] or ''  }}</span>
+      <a href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
+      <a href="{{ url_for('contacto') }}"><i class="fas fa-envelope"></i> Contacto</a>
+      <a href="{{ url_for('nosotros') }}"><i class="fas fa-users"></i> Nosotros</a>
+      <a href="{{ url_for('galeria') }}"><i class="fas fa-images"></i> Galería</a>
+      <a href="{{ url_for('terminos') }}"><i class="fas fa-file-contract"></i> Términos y Condiciones</a>
+      <a href="{{ url_for('mis_eventos') }}"><i class="fas fa-calendar-alt"></i> Mis Eventos</a>
+      <a href="{{ url_for('mis_boletos') }}"><i class="fas fa-ticket-alt"></i> Mis Boletos</a>
+      {% else %} <a href="#" class="login-btn" data-bs-toggle="modal" data-bs-target="#loginModal">
+          <i class="fas fa-sign-in-alt"></i> Iniciar Sesión
       </a>
+      <a href="{{ url_for('contacto') }}"><i class="fas fa-envelope"></i> Contacto</a>
+      <a href="{{ url_for('nosotros') }}"><i class="fas fa-users"></i> Nosotros</a>
+      <a href="{{ url_for('galeria') }}"><i class="fas fa-images"></i> Galería</a>
+      <a href="{{ url_for('terminos') }}"><i class="fas fa-file-contract"></i> Términos y Condiciones</a>
+      {% endif %}
     </div>
-
     <header>
       <video autoplay muted loop id="bg-video">
         <source src="{{ url_for('static', filename='img/evento2.mp4') }}" type="video/mp4">
@@ -41,112 +51,138 @@
         </div>
       </div>
     </header>
-
-<!-- Modal para Login y Sign Up -->
-<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content"> <!-- Sin modo oscuro -->
-      <div class="modal-header">
-        <h5 class="modal-title" id="loginModalLabel">Iniciar Sesión / Registrarse</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <!-- Formulario de Login -->
-        <form id="login-form" method="POST" action="/login">
-          <div class="mb-3">
-            <label for="email" class="form-label">Correo Electrónico</label>
-            <input type="email" name="email" class="form-control" id="email" placeholder="Ingresa tu correo" required>
+    
+    <!-- Modal para Login y Sign Up -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content"> <!-- Sin modo oscuro -->
+          <div class="modal-header">
+            <h5 class="modal-title" id="loginModalLabel">Iniciar Sesión / Registrarse</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div class="mb-3">
-            <label for="login-password" class="form-label">Contraseña</label>
-            <div class="input-group">
-              <input type="password" name="password" class="form-control" id="login-password" placeholder="Ingresa tu contraseña" required>
-              <button class="btn btn-outline-secondary" type="button" id="toggle-login-password">Mostrar</button>
-            </div>
+          <div class="modal-body">
+            <!-- Formulario de Login -->
+            <form id="login-form" method="POST" action="/login">
+              <div class="mb-3">
+                <label for="email" class="form-label">Correo Electrónico</label>
+                <input type="email" name="email" class="form-control" id="email" placeholder="Ingresa tu correo" required>
+              </div>
+              <div class="mb-3">
+                <label for="login-password" class="form-label">Contraseña</label>
+                <div class="input-group">
+                  <input type="password" name="password" class="form-control" id="login-password" placeholder="Ingresa tu contraseña" required>
+                  <button class="btn btn-outline-secondary" type="button" id="toggle-login-password">Mostrar</button>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary w-100">Iniciar Sesión</button>
+            </form>
+    
+            <!-- Formulario de Sign Up -->
+            <form id="signup-form" method="POST" action="/signup" class="d-none">
+              <div class="mb-3">
+                <label for="signup-firstname" class="form-label">Nombre</label>
+                <input type="text" name="name" class="form-control" id="signup-firstname" placeholder="Ingresa tu nombre" required>
+              </div>
+              <div class="mb-3">
+                <label for="signup-lastname" class="form-label">Apellido</label>
+                <input type="text" name="lastname" class="form-control" id="signup-lastname" placeholder="Ingresa tu apellido" required>
+              </div>
+              <div class="mb-3">
+                <label for="signup-email" class="form-label">Correo Electrónico</label>
+                <input type="email" name="email" class="form-control" id="signup-email" placeholder="Ingresa tu correo" required>
+              </div>
+              <div class="mb-3">
+                <label for="signup-password" class="form-label">Contraseña</label>
+                <div class="input-group">
+                  <input type="password" name="password" class="form-control" id="signup-password" placeholder="Crea una contraseña" required>
+                  <button class="btn btn-outline-secondary" type="button" id="toggle-signup-password">Mostrar</button>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-success w-100">Registrarse</button>
+            </form>
           </div>
-          <button type="submit" class="btn btn-primary w-100">Iniciar Sesión</button>
-        </form>
-
-        <!-- Formulario de Sign Up -->
-        <form id="signup-form" method="POST" action="/signup" class="d-none">
-          <div class="mb-3">
-            <label for="signup-firstname" class="form-label">Nombre</label>
-            <input type="text" name="name" class="form-control" id="signup-firstname" placeholder="Ingresa tu nombre" required>
+          <div class="modal-footer">
+            <button class="btn btn-link" id="toggle-form">¿No tienes cuenta? Regístrate</button>
           </div>
-          <div class="mb-3">
-            <label for="signup-lastname" class="form-label">Apellido</label>
-            <input type="text" name="lastname" class="form-control" id="signup-lastname" placeholder="Ingresa tu apellido" required>
-          </div>
-          <div class="mb-3">
-            <label for="signup-email" class="form-label">Correo Electrónico</label>
-            <input type="email" name="email" class="form-control" id="signup-email" placeholder="Ingresa tu correo" required>
-          </div>
-          <div class="mb-3">
-            <label for="signup-password" class="form-label">Contraseña</label>
-            <div class="input-group">
-              <input type="password" name="password" class="form-control" id="signup-password" placeholder="Crea una contraseña" required>
-              <button class="btn btn-outline-secondary" type="button" id="toggle-signup-password">Mostrar</button>
-            </div>
-          </div>
-          <button type="submit" class="btn btn-success w-100">Registrarse</button>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button class="btn btn-link" id="toggle-form">¿No tienes cuenta? Regístrate</button>
+        </div>
       </div>
     </div>
-  </div>
-</div>
 
 
     {% block content %}
     {% endblock %}
 
     <footer class="footer-section">
-        <div class="copyright-area">
-            <div class="container-footer">
-                <div class="row-footer">
-                    <div class="col-xl-6 col-lg-6 text-center text-lg-left">
-                        <div class="copyright-text">
-                            <p> Hecho en Mexico con 👾 por <a href="{{ url_for('index')}}">Festy Plan</a> Copyright &copy;, todos los derechos reservados 2024</p>
-                        </div>
-                    </div>
-                    <div class="col-xl-6 col-lg-6 d-none d-lg-block text-right">
-                        <div class="footer-menu">
-                            <ul>
-                                <li><a href="{{ url_for('contacto')}}">Contacto</a></li>
-                                <li><a href="{{ url_for('nosotros')}}">Nosotros</a></li>
-                                <li><a href="{{ url_for('galeria')}}">Galeria</a></li>
-                                <li><a href="{{ url_for('terminos')}}">Terminos y Condiciones</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-      </footer> 
-      
-      <!-- Scripts -->
-      <script src="{{ url_for('static', filename='js/jquery-3.5.1.min.js') }}"></script>
-      <script src="{{ url_for('static', filename='js/index.js') }}"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-      
-      <script>
-        if ('serviceWorker' in navigator) {
+      <div class="copyright-area">
+          <div class="container-footer">
+              <div class="row-footer">
+                  <div class="col-xl-6 col-lg-6 text-center text-lg-left">
+                      <div class="copyright-text">
+                          <p>Hecho en México con 👾 por <a href="{{ url_for('index')}}">Festy Plan</a> Copyright &copy;, todos los derechos reservados 2024</p>
+                      </div>
+                  </div>
+                  <div class="col-xl-6 col-lg-6 text-right">
+                      <div class="footer-menu">
+                          <ul>
+                              <li><a href="{{ url_for('contacto')}}">Contacto</a></li>
+                              <li><a href="{{ url_for('nosotros')}}">Nosotros</a></li>
+                              <li><a href="{{ url_for('galeria')}}">Galería</a></li>
+                              <li><a href="{{ url_for('terminos')}}">Términos y Condiciones</a></li>
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+              <div class="row-footer">
+                  <div class="col-12 text-center">
+                      <div id="google_translate_element"></div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </footer>
+  
+  <!-- Scripts -->
+  <script src="{{ url_for('static', filename='js/jquery-3.5.1.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+  
+  <script>
+      if ('serviceWorker' in navigator) {
           window.addEventListener('load', function() {
-            navigator.serviceWorker.register("{{ url_for('static', filename='service-worker.js') }}")
-              .then(function(registration) {
-                console.log('Service Worker registrado con éxito:', registration.scope);
-              }, function(err) {
-                console.log('Error al registrar el Service Worker:', err);
-              });
+              navigator.serviceWorker.register("{{ url_for('static', filename='service-worker.js') }}")
+                  .then(function(registration) {
+                      console.log('Service Worker registrado con éxito:', registration.scope);
+                  }, function(err) {
+                      console.log('Error al registrar el Service Worker:', err);
+                  });
           });
-        }
+      }
+      function toggleMenu() {
+        const menu = document.getElementById('menu');
 
-        // Función para alternar el menú desplegable
-        function toggleMenu() {
-          document.querySelector('.menu-desplegable').classList.toggle('active');
+        // Verificar si el menú está activo
+        const isActive = menu.classList.contains('active');
+
+        // Alternar la clase 'active' y 'inactive' según el estado del menú
+        if (isActive) {
+            menu.classList.remove('active');
+            menu.classList.add('inactive');
+        } else {
+            menu.classList.remove('inactive');
+            menu.classList.add('active');
         }
-      </script>
+    }
+
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+            pageLanguage: 'es',
+            includedLanguages: 'en,ja,es',
+            layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+            autoDisplay: false
+        }, 'google_translate_element');
+    }
+  </script>
+  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  
     </body>
 </html>

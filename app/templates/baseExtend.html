@@ -46,10 +46,10 @@
                 <div class="row-footer">
                     <div class="col-xl-6 col-lg-6 text-center text-lg-left">
                         <div class="copyright-text">
-                            <p> Hecho en México con 👾 por <a href="{{ url_for('index')}}">Festy Plan</a> Copyright &copy;, todos los derechos reservados 2024</p>
+                            <p>Hecho en México con 👾 por <a href="{{ url_for('index')}}">Festy Plan</a> Copyright &copy;, todos los derechos reservados 2024</p>
                         </div>
                     </div>
-                    <div class="col-xl-6 col-lg-6 d-none d-lg-block text-right">
+                    <div class="col-xl-6 col-lg-6 text-right">
                         <div class="footer-menu">
                             <ul>
                                 <li><a href="{{ url_for('contacto')}}">Contacto</a></li>
@@ -60,10 +60,14 @@
                         </div>
                     </div>
                 </div>
+                <div class="row-footer">
+                    <div class="col-12 text-center">
+                        <div id="google_translate_element"></div>
+                    </div>
+                </div>
             </div>
         </div>
-      </footer> 
-
+    </footer>
     <!-- Scripts -->
     <script>
       // Registro del service worker
@@ -76,8 +80,15 @@
             console.log('Error al registrar el Service Worker:', error);
           });
       }
+      function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+            pageLanguage: 'es',
+            includedLanguages: 'en,ja,es',
+            layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+            autoDisplay: false
+        }, 'google_translate_element');
+    }
     </script>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="{{ url_for('static', filename='js/jquery-3.5.1.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/index.js') }}"></script>

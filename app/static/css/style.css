@@ -485,11 +485,22 @@ header {
     left: -300px;
     height: 100%;
     width: 250px;
-    background: linear-gradient(45deg, #201e1e94,   #201e1e94,   #201e1e94,   #201e1e94);
+    background: linear-gradient(45deg, #201e1e94, #201e1e94, #201e1e94, #201e1e94);
     padding: 70px 20px 20px 30px; /* Espacio superior para evitar que se sobreponga al icono */
-    transition: 0.3s;
-    box-shadow: 5px 0 15px rgba(0,0,0,0.1);
+    transition: left 0.3s ease; /* Cambiar solo left en la transición */
+    box-shadow: 5px 0 15px rgba(0, 0, 0, 0.1);
     z-index: 999;
+}
+
+.menu-desplegable.active {
+    left: 0;
+}
+
+.menu-icon {
+    position: fixed; /* Hacer que el icono de menú esté fijo */
+    top: 20px; /* Ajusta la posición vertical */
+    left: 20px; /* Ajusta la posición horizontal */
+    z-index: 1000; /* Asegúrate de que esté encima de otros elementos */
 }
 
 .menu-desplegable.active {
@@ -622,38 +633,30 @@ header {
     display: none; /* Oculto inicialmente */
     margin-top: 10px; /* Espacio superior */
 }
-
-/* Colores para el medidor */
-.weak {
-    background-color: red;
-}
-
-.medium {
-    background-color: orange;
-}
-
-.strong {
-    background-color: green;
-}
-
-.strength-bar {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 5px; /* Espacio entre el input y el medidor */
-}
-
-.strength {
-    font-size: 12px;
-    width: 50%; /* Cada texto ocupará la mitad de la barra */
-    text-align: center;
-}
-
-.weak {
+.password-strength {
+    display: none;
+    margin-top: 5px;
+    font-size: 14px;
+  }
+  
+  .password-strength.weak {
     color: red;
-}
-
-.strong {
+  }
+  
+  .password-strength.medium {
+    color: orange;
+  }
+  
+  .password-strength.strong {
     color: green;
-}
+  }
+  
 
-
+  .username {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 1.2em;
+    color: white;
+  }
+  

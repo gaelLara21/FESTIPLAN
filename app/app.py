@@ -84,7 +84,9 @@ def login():
 
 @app.route('/logout')
 def logout():
+    # Cerrar sesión y eliminar los datos del usuario de la sesión
     session.pop('user_id', None)
+    session.pop('user_name', None)  # Eliminar el nombre del usuario de la sesión
     flash('Has cerrado sesión', 'success')
     return redirect(url_for('index'))
 
@@ -116,11 +118,21 @@ def galeria():
 def eventos():
     return render_template('eventos.html')
 
-
-@app.route('/qr')
-def qr():
-    return render_template('qr.html')
-
+@app.route('/mis_eventos')
+def mis_eventos():
+    if 'user_id' in session:
+        return render_template('mis_eventos.html')
+    else:
+        return redirect(url_for('index'))  
+    
+    
+@app.route('/mis_boletos')
+def mis_boletos():
+    if 'user_id' in session:
+        # Lógica para mostrar los boletos del usuario
+        return render_template('mis_boletos.html')
+    else:
+        return redirect(url_for('index'))  # Redirigir si no está logueado
 ############################ Terminan rutas ordinarias ###################################################
 
 
