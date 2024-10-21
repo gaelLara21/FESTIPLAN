@@ -16,6 +16,9 @@ const urlsToCache = [
   '/static/css/style.css',
   '/static/css/register.css',
   '/static/js/jquery-3.5.1.min.js',
+  '/css/bootstrap.min.css', 
+  '/css/all.min.css',       
+  '/js/bootstrap.bundle.min.js',
   '/static/icons/icon-192x192.png',
   '/static/icons/icon-512x512.png'
 ];
