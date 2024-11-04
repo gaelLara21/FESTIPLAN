@@ -1,0 +1,6 @@
+Flask==2.3.2                # El marco de trabajo principal de tu aplicación
+Flask-SQLAlchemy==2.5.1     # Para la gestión de bases de datos con SQLAlchemy
+Flask-Migrate==3.1.0        # Para la migración de bases de datos
+Flask-RESTful==0.3.9        # Para construir APIs RESTful
+pytest==8.3.3               # Para realizar pruebas
+pytest-cov==4.0.0           # Para la cobertura de pruebas

@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="0" skipped="0" tests="1" time="0.221" timestamp="2024-11-03T21:59:48.086640-06:00" hostname="DESKTOP-KLPSU2F"><testcase classname="tests.test_example" name="test_suma" time="0.003" /></testsuite></testsuites>
