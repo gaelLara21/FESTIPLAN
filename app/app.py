@@ -20,50 +20,6 @@ cursor = db.cursor(dictionary=True)
 
 ###################### Rutas conectadas a base de Datos ######################################
 
-@app.route('/crear', methods=['GET', 'POST'])
-def crear():
-    if request.method == 'POST':
-        # Obtener datos del formulario
-        titulo = request.form['titulo']
-        descripcion = request.form['descripcion']
-        fecha = request.form['fecha']
-        capacidad = request.form['capacidad']
-        costo = request.form['costo']
-        categoria = request.form['categoria']
-        
-        # Manejo de la imagen
-        if 'foto' not in request.files:
-            flash('No se subió ninguna imagen', 'error')
-            return redirect(url_for('crear'))
-        
-        foto = request.files['foto']
-        
-        # Validar que se haya seleccionado una imagen
-        if foto.filename == '':
-            flash('No se seleccionó ninguna imagen', 'error')
-            return redirect(url_for('crear'))
-        
-        # Guardar la imagen en el servidor
-        foto_filename = secure_filename(foto.filename)
-        foto_path = os.path.join('static/uploads', foto_filename)
-        foto.save(foto_path)
-
-        # Insertar el evento en la base de datos
-        sql = """
-            INSERT INTO eventos (titulo, descripcion, capacidad, costo, categoria, foto, fecha)
-            VALUES (%s, %s, %s, %s, %s, %s, %s)
-        """
-        val = (titulo, descripcion, capacidad, costo, categoria, foto_path, fecha)
-        cursor.execute(sql, val)
-        db.commit()
-
-        flash('Evento creado correctamente', 'success')
-        return redirect(url_for('index'))
-
-    return render_template('crear.html')
-
-
-
 @app.route('/boletos')
 def boletos():
     return render_template('boletos.html')
@@ -160,14 +116,60 @@ def galeria():
 
 ############# Rutas de los eventos ##################
 
+@app.route('/crear', methods=['GET', 'POST'])
+def crear():
+    if request.method == 'POST':
+        if 'user_id' not in session:
+            flash("Debes iniciar sesión para crear un evento", "error")
+            return redirect(url_for('index'))
+
+        # Obtener datos del formulario
+        titulo = request.form['titulo']
+        descripcion = request.form['descripcion']
+        fecha = request.form['fecha']
+        capacidad = request.form['capacidad']
+        costo = request.form['costo']
+        categoria = request.form['categoria']
+        user_id = session['user_id']
+
+        # Manejo de la imagen
+        if 'foto' not in request.files:
+            flash('No se subió ninguna imagen', 'error')
+            return redirect(url_for('crear'))
+        
+        foto = request.files['foto']
+        
+        # Validar que se haya seleccionado una imagen
+        if foto.filename == '':
+            flash('No se seleccionó ninguna imagen', 'error')
+            return redirect(url_for('crear'))
+        
+        # Guardar la imagen en el servidor
+        foto_filename = secure_filename(foto.filename)
+        foto_path = os.path.join('static/uploads', foto_filename)
+        foto.save(foto_path)
+
+        # Insertar el evento en la base de datos
+        sql = """
+            INSERT INTO eventos (titulo, descripcion, capacidad, costo, categoria, foto, fecha, id_user)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+        """
+        val = (titulo, descripcion, capacidad, costo, categoria, foto_path, fecha, user_id)
+        cursor.execute(sql, val)
+        db.commit()
+
+        flash('Evento creado correctamente', 'success')
+        return redirect(url_for('index'))
+
+    return render_template('crear.html')
+
+# Otras rutas y funciones de la aplicación
 @app.route('/eventos')
 def eventos():
     cursor.execute("SELECT * FROM eventos")
     eventos = cursor.fetchall()
     return render_template('eventos.html', eventos=eventos)
 
-
-# Ruta para mostrar, editar y eliminar los eventos del usuario
 @app.route('/mis_eventos')
 def mis_eventos():
     if 'user_id' in session:
@@ -177,8 +179,7 @@ def mis_eventos():
         return render_template('mis_eventos.html', eventos=eventos)
     else:
         return redirect(url_for('index'))
-    
-# Ruta para eliminar un evento
+
 @app.route('/eliminar_evento/<int:id_evento>', methods=['POST'])
 def eliminar_evento(id_evento):
     if 'user_id' in session:
@@ -190,7 +191,6 @@ def eliminar_evento(id_evento):
         flash("Debes iniciar sesión para realizar esta acción", "error")
     return redirect(url_for('mis_eventos'))
 
-# Ruta para editar un evento
 @app.route('/editar_evento/<int:id_evento>', methods=['GET', 'POST'])
 def editar_evento(id_evento):
     if 'user_id' not in session:
