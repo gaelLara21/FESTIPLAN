@@ -1,45 +1,39 @@
-{% extends 'baseExtend.html' %}
+{% extends 'baseBol.html' %}
 
 {% block title %}Crea Tu Evento{% endblock %}
 
 {% block content %}
 
 <main>
+
     <h1>Crear Evento</h1>
-    <form action="/crear_evento" method="POST" enctype="multipart/form-data">
-        <div>
-            <label for="titulo">Título:</label>
-            <input type="text" id="titulo" name="titulo" required>
-        </div>
-        <div>
-            <label for="descripcion">Descripción:</label>
-            <textarea id="descripcion" name="descripcion" required></textarea>
-        </div>
-        <div>
-            <label for="capacidad">Capacidad:</label>
-            <input type="number" id="capacidad" name="capacidad" required>
-        </div>
-        <div>
-            <label for="costo">Costo:</label>
-            <input type="number" id="costo" name="costo" step="0.01" required>
-        </div>
-        <div>
-            <label for="categoria">Categoría:</label>
-            <select id="categoria" name="categoria" required>
-                <option value="concierto">Concierto</option>
-                <option value="evento_personal">Evento Personal</option>
-                <option value="recital">Recital</option>
-                <!-- Agrega más categorías según sea necesario -->
-            </select>
-        </div>
-        <div>
-            <label for="foto">Foto (Poster Promocional):</label>
-            <input type="file" id="foto" name="foto" accept="image/*" required>
-        </div>
-        <div>
-            <label for="fecha">Fecha:</label>
-            <input type="date" id="fecha" name="fecha" required>
-        </div>
+    <form method="POST" enctype="multipart/form-data">
+        <label>Nombre del evento:</label><br>
+        <input type="text" name="titulo" required><br><br>
+
+        <label>Descripción:</label><br>
+        <textarea name="descripcion" required></textarea><br><br>
+
+        <label>Fecha:</label><br>
+        <input type="datetime-local" name="fecha" required><br><br>
+
+        <label>Capacidad de boletos:</label><br>
+        <input type="number" name="capacidad" min="1" required><br><br>
+
+        <label>Costo del boleto:</label><br>
+        <input type="number" name="costo" step="0.01" required><br><br>
+
+        <label>Categoría:</label><br>
+        <select name="categoria" required>
+            <option value="concierto">Concierto</option>
+            <option value="evento personal">Evento Personal</option>
+            <option value="recital">Recital</option>
+            <option value="otro">Otro</option>
+        </select><br><br>
+
+        <label>Imagen del evento:</label><br>
+        <input type="file" name="foto" required>
+
         <button type="submit">Crear Evento</button>
     </form>
 </main>

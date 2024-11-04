@@ -1,11 +1,29 @@
-{% extends 'baseExtend.html' %}
+{% extends 'baseBol.html' %}
 
 {% block title %}Aquiere Tus Boletos{% endblock %}
 
 {% block content %}
 
 <main>
-    <h1>Adqurir Boletos</h1>   
+    <title>Venta de Boletos</title>
+</head>
+<body>
+    <h1>Venta de Boletos</h1>
+    <form method="POST">
+        <label>Evento:</label><br>
+        <select name="evento" required>
+            {% for evento in eventos %}
+                <option value="{{ evento.id_evento }}">
+                    {{ evento.titulo }} - ${{ evento.costo }} MXN (Disponibles: {{ evento.capacidad }})
+                </option>
+            {% endfor %}
+        </select><br><br>
+
+        <label>Cantidad de Boletos:</label><br>
+        <input type="number" name="cantidad" min="1" required><br><br>
+
+        <button type="submit">Comprar</button>
+    </form>
 </main>
 
 

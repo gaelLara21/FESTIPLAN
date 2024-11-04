@@ -5,7 +5,22 @@
 {% block content %}
 
 <main>
-    <h1>Esta es la galeria</h1>   
+    <h1>Eventos</h1>
+    <div>
+        {% for evento in eventos %}
+            <div>
+                <h2>{{ evento.titulo }}</h2>
+                <p>{{ evento.descripcion }}</p>
+                <p>Fecha: {{ evento.fecha }}</p>
+                <p>Capacidad: {{ evento.capacidad }}</p>
+                <p>Costo: ${{ evento.costo }}</p>
+                <p>Categoría: {{ evento.categoria }}</p>
+                {% if evento.foto %}
+                    <img src="{{ evento.foto }}" alt="{{ evento.titulo }}" width="200">
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
 </main>
 
 

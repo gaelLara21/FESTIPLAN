@@ -5,7 +5,29 @@
 {% block content %}
 
 <main>
-    <h1>Boletos Adquridos</h1>   
+    <h1>Mis Boletos</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID Ticket</th>
+                <th>Asiento</th>
+                <th>Precio</th>
+                <th>Fecha de Venta</th>
+                <th>Evento</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for boleto in boletos %}
+            <tr>
+                <td>{{ boleto.id_ticket }}</td>
+                <td>{{ boleto.numero_asiento }}</td>
+                <td>{{ boleto.precio }}</td>
+                <td>{{ boleto.fecha_venta }}</td>
+                <td>{{ boleto.titulo }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>  
 </main>
 
 

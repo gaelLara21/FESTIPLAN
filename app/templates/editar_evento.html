@@ -1,0 +1,39 @@
+{% extends 'baseBol.html' %}
+
+{% block title %}Crea Tu Evento{% endblock %}
+
+{% block content %}
+
+
+<main>
+    <h1>Editar Evento</h1>
+    <form method="POST">
+        <label>Nombre del evento:</label><br>
+        <input type="text" name="titulo" value="{{ evento.titulo }}" required><br><br>
+
+        <label>Descripción:</label><br>
+        <textarea name="descripcion" required>{{ evento.descripcion }}</textarea><br><br>
+
+        <label>Fecha:</label><br>
+        <input type="datetime-local" name="fecha" value="{{ evento.fecha|replace(' ', 'T') }}" required><br><br>
+
+        <label>Capacidad de boletos:</label><br>
+        <input type="number" name="capacidad" value="{{ evento.capacidad }}" required><br><br>
+
+        <label>Costo del boleto:</label><br>
+        <input type="number" name="costo" step="0.01" value="{{ evento.costo }}" required><br><br>
+
+        <label>Categoría:</label><br>
+        <select name="categoria" required>
+            <option value="concierto" {% if evento.categoria == 'concierto' %}selected{% endif %}>Concierto</option>
+            <option value="evento personal" {% if evento.categoria == 'evento personal' %}selected{% endif %}>Evento Personal</option>
+            <option value="recital" {% if evento.categoria == 'recital' %}selected{% endif %}>Recital</option>
+            <option value="otro" {% if evento.categoria == 'otro' %}selected{% endif %}>Otro</option>
+        </select><br><br>
+
+        <button type="submit">Guardar Cambios</button>
+    </form>
+</main>
+
+<script src="{{ url_for('static', filename='js/jquery-3.5.1.min.js') }}"></script>
+{% endblock %}
