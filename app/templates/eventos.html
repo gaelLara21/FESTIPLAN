@@ -18,11 +18,13 @@
                 {% if evento.foto %}
                     <img src="{{ evento.foto }}" alt="{{ evento.titulo }}" width="200">
                 {% endif %}
+                
+                <!-- Botón para adquirir boletos -->
+                <a href="{{ url_for('venta', id_evento=evento.id_evento) }}" class="btn">Adquirir boletos</a>
             </div>
         {% endfor %}
     </div>
 </main>
-
 
 <script src="{{ url_for('static', filename='js/jquery-3.5.1.min.js') }}"></script>
 

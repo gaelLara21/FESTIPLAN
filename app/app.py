@@ -1,9 +1,12 @@
-from flask import Flask, redirect, render_template, request, url_for, flash, session
+from flask import Flask, redirect, render_template, request, url_for, flash, session, send_file
 import mysql.connector
 from werkzeug.security import generate_password_hash, check_password_hash
 import os
 from werkzeug.utils import secure_filename
 from datetime import datetime
+import qrcode
+from io import BytesIO
+import base64
 
 app=Flask(__name__)
 app.secret_key = 'supersecreto'
@@ -20,14 +23,73 @@ cursor = db.cursor(dictionary=True)
 
 ###################### Rutas conectadas a base de Datos ######################################
 
-@app.route('/boletos')
-def boletos():
-    return render_template('boletos.html')
+@app.route('/mis_boletos')
+def mis_boletos():
+    if 'user_id' not in session:
+        flash("Debes iniciar sesión para ver tus boletos", "error")
+        return redirect(url_for('index'))
+
+    user_id = session['user_id']
+    cursor.execute("""
+        SELECT b.id_boleto, e.titulo, e.fecha, e.costo, b.qr_code 
+        FROM boletos b
+        INNER JOIN eventos e ON b.id_evento = e.id_evento
+        WHERE b.id_user = %s
+    """, (user_id,))
+    boletos = cursor.fetchall()
+
+    return render_template('mis_boletos.html', boletos=boletos)
 
 
-@app.route('/venta')
-def venta():
-    return render_template('venta.html')
+@app.route('/venta/<int:id_evento>', methods=['GET', 'POST'])
+def venta(id_evento):
+    if 'user_id' not in session:
+        flash("Debes iniciar sesión para comprar boletos", "error")
+        return redirect(url_for('index'))
+    
+    # Obtener información del evento, asegurándose de que la ruta de la imagen sea correcta
+    cursor.execute("""
+        SELECT id_evento, titulo, descripcion, fecha, capacidad, costo, 
+               CONCAT('static/uploads/', foto) AS foto
+        FROM eventos WHERE id_evento = %s
+    """, (id_evento,))
+    evento = cursor.fetchone()
+
+    if not evento:
+        flash("El evento no existe", "error")
+        return redirect(url_for('eventos'))
+
+    if request.method == 'POST':
+        cantidad = int(request.form['cantidad'])
+        total = cantidad * evento['costo']
+        user_id = session['user_id']
+
+        # Validar capacidad
+        if cantidad > evento['capacidad']:
+            flash("No hay suficientes boletos disponibles", "error")
+            return redirect(url_for('venta', id_evento=id_evento))
+
+        # Generar código QR único para la transacción
+        datos_transaccion = f"Evento: {evento['titulo']}\nUsuario: {user_id}\nCantidad: {cantidad}\nTotal: {total}"
+        qr = qrcode.make(datos_transaccion)
+        qr_filename = f"static/qrs/qr_{datetime.now().strftime('%Y%m%d%H%M%S')}.png"
+        qr.save(qr_filename)
+
+        # Insertar boletos en la base de datos
+        cursor.execute("""
+            INSERT INTO boletos (id_user, id_evento, cantidad, qr_code) VALUES (%s, %s, %s, %s)
+        """, (user_id, id_evento, cantidad, qr_filename))
+        db.commit()
+
+        # Actualizar capacidad restante del evento
+        nueva_capacidad = evento['capacidad'] - cantidad
+        cursor.execute("UPDATE eventos SET capacidad = %s WHERE id_evento = %s", (nueva_capacidad, id_evento))
+        db.commit()
+
+        flash("Compra realizada con éxito", "success")
+        return redirect(url_for('mis_boletos'))
+
+    return render_template('venta.html', evento=evento)
 
 ##################### Terminan Rutas Conectadas a una base de Datos ###############################
 
@@ -224,14 +286,7 @@ def editar_evento(id_evento):
     
 ######## Terminan Rutas de los Eventos ################
     
-    
-@app.route('/mis_boletos')
-def mis_boletos():
-    if 'user_id' in session:
-        # Lógica para mostrar los boletos del usuario
-        return render_template('mis_boletos.html')
-    else:
-        return redirect(url_for('index'))  # Redirigir si no está logueado
+
 ############################ Terminan rutas ordinarias ###################################################
 
 

@@ -1,32 +1,45 @@
-{% extends 'baseBol.html' %}
+{% extends 'baseExtend.html' %}
 
-{% block title %}Aquiere Tus Boletos{% endblock %}
+{% block title %}Compra de Boletos{% endblock %}
 
 {% block content %}
 
 <main>
-    <title>Venta de Boletos</title>
-</head>
-<body>
-    <h1>Venta de Boletos</h1>
-    <form method="POST">
-        <label>Evento:</label><br>
-        <select name="evento" required>
-            {% for evento in eventos %}
-                <option value="{{ evento.id_evento }}">
-                    {{ evento.titulo }} - ${{ evento.costo }} MXN (Disponibles: {{ evento.capacidad }})
-                </option>
-            {% endfor %}
-        </select><br><br>
+    <h1>Compra de Boletos para {{ evento.titulo }}</h1>
+    
+    <div>
+        <h2>{{ evento.titulo }}</h2>
+        <p>{{ evento.descripcion }}</p>
+        <p>Fecha: {{ evento.fecha }}</p>
+        <p>Capacidad restante: {{ evento.capacidad }}</p>
+        <p>Costo por boleto: ${{ evento.costo }}</p>
+        
+        {% if evento.foto %}
+            <!-- Cargar imagen desde static/uploads -->
+            <img src="{{ url_for('static', filename=evento.foto.split('static/')[1]) }}" alt="{{ evento.titulo }}" width="200">
+        {% else %}
+            <p>Imagen no disponible</p>
+        {% endif %}
+    </div>
 
-        <label>Cantidad de Boletos:</label><br>
-        <input type="number" name="cantidad" min="1" required><br><br>
+    <form method="POST" action="{{ url_for('venta', id_evento=evento.id_evento) }}">
+        <div>
+            <label for="cantidad">Cantidad de boletos:</label>
+            <input type="number" id="cantidad" name="cantidad" min="1" max="{{ evento.capacidad }}" required>
+        </div>
 
-        <button type="submit">Comprar</button>
+        <button type="submit">Comprar Boletos</button>
     </form>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul>
+                {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
 </main>
-
-
-<script src="{{ url_for('static', filename='js/jquery-3.5.1.min.js') }}"></script>
 
 {% endblock %}

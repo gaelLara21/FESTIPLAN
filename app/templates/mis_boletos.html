@@ -5,9 +5,19 @@
 {% block content %}
 
 <main>
-    <h1>Estos son mis Boletos</h1>   
+    <h1>Mis Boletos</h1>
+    <ul>
+        {% for boleto in boletos %}
+        <li>
+            <p>Evento: {{ boleto['titulo'] }}</p>
+            <p>Fecha: {{ boleto['fecha'] }}</p>
+            <p>Cantidad de boletos: {{ boleto['cantidad'] }}</p>
+            <p>Total pagado: ${{ boleto['total'] }}</p>
+            <img src="{{ boleto['qr_code'] }}" alt="QR del boleto">
+        </li>
+        {% endfor %}
+    </ul>
 </main>
-
 
 <script src="{{ url_for('static', filename='js/jquery-3.5.1.min.js') }}"></script>
 
