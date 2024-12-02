@@ -115,6 +115,7 @@ header {
     position: relative;
     height: 700px;
     overflow: hidden;
+    
 }
 
 /* Video de fondo */
@@ -136,18 +137,34 @@ header .contenedor {
 }
 
 header .menu {
-    display: flex;
-    justify-content: flex-end; 
-    gap: 40px; 
-    width: 100%;
-    margin-top: 45px; 
+    header .menu {
+        width: 100%;
+        text-align: right;
+        margin-top: 40px; 
+    }
 }
-
-header .menu a {
+/* Para ambos, menu-link y login-btn */
+.menu-link, .login-btn {
     color: #fff;
     font-size: 20px;
     font-weight: 300;
     text-decoration: none;
+    margin: 0 15px;
+    position: relative;
+    margin-top: 20px; 
+}
+
+.menu-link:hover, .login-btn:hover {
+    text-decoration: underline;
+}
+header .menu a {
+    color: #fff;
+    font-size: 20px;
+    font-weight: 300;
+    display: inline-block;
+    margin: 40px 20px;
+    text-decoration: none;
+    position: relative;
 }
 
 header .menu a:hover {
@@ -504,145 +521,27 @@ svg defs linearGradient#gradiente-iconos {
     --color-fin: #8b5cf6;
 }
 
-/* Estilos para el menú desplegable */
-.menu-icon {
-    cursor: pointer;
-    padding: 10px;
-    position: absolute;
-    right: 19px;
-    left: 24px; 
-    top: 15px; 
-    z-index: 1000;
-}
-
-.menu-icon div {
-    width: 35px;
-    height: 5px;
-    background-color: white;
-    margin: 6px 0;
-    transition: 0.4s;
-}
-
-.menu-icon.active div:nth-child(1) {
-    transform: rotate(-45deg) translate(-9px, 6px);
-}
-
-.menu-icon.active div:nth-child(2) {
-    opacity: 0;
-}
-
-.menu-icon.active div:nth-child(3) {
-    transform: rotate(45deg) translate(-8px, -8px);
-}
-
-/* Estilos del menú desplegable */
-.menu-desplegable {
-    position: fixed;
-    top: 0;
-    left: -300px;
-    height: 100%;
-    width: 250px;
-    background: linear-gradient(45deg, #201e1e94, #201e1e94, #201e1e94, #201e1e94);
-    padding: 70px 20px 20px 30px; /* Espacio superior para evitar que se sobreponga al icono */
-    transition: left 0.3s ease; /* Cambiar solo left en la transición */
-    box-shadow: 5px 0 15px rgba(0, 0, 0, 0.1);
-    z-index: 999;
-}
-
-.menu-desplegable.active {
-    left: 0;
-}
-
-.menu-icon {
-    position: fixed; /* Hacer que el icono de menú esté fijo */
-    top: 20px; /* Ajusta la posición vertical */
-    left: 20px; /* Ajusta la posición horizontal */
-    z-index: 1000; /* Asegúrate de que esté encima de otros elementos */
-}
-
-.menu-desplegable.active {
-    left: 0;
-}
-
-.menu-desplegable a {
-    display: flex; /* Cambiado a flex para alinear icono y texto */
-    align-items: center; /* Alinear verticalmente los elementos */
-    color: #ffffff; /* Color del texto */
-    text-decoration: none; /* Sin subrayado */
-    font-size: 18; /* Tamaño de fuente */
-    margin: 20px 0; /* Margen entre enlaces */
-}
-
-.menu-video {
-    width: 100%; /* Asegúrate de que el video ocupe el ancho del menú */
-    height: auto; /* Altura automática para mantener la proporción */
-    margin-bottom: 20px; /* Espacio inferior para separar el video del contenido */
-}
-
-.menu-desplegable a i {
-    margin-right: 15px; /* Espacio entre el icono y el texto */
-    color: #ffffff; /* Color del icono */
-    font-size: 20px; /* Tamaño del icono, ajusta según sea necesario */
-}
-.menu-desplegable .login-btn {
-
-    background-color: #5f0606;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    text-decoration: none;
-    border-radius: 5px;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    font-size: 16px;
-    margin-top: 20px;
-}
-
-
-/* Estilos para pantallas grandes (PC) */
-@media screen and (min-width: 769px) {
-    header .menu {
-        display: flex;
-    }
-}
-
-/* Estilos para pantallas pequeñas (móvil) */
-@media screen and (max-width: 768px) {
-    header .menu {
-        display: none;
-    }
-}
 
 /* Estilos para formularios flotantes */
-.floating-form {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 400px; /* Ajusta el ancho del formulario */
+.modal-content {
+    position: relative;
+    width: 400px;
     background-color: #ffffff;
-    padding: 20px;
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
-    z-index: 1000; /* Asegura que esté sobre otros elementos */
     border-radius: 8px;
-    opacity: 0; /* Oculto inicialmente */
-    visibility: hidden;
-    transition: all 0.3s ease;
 }
 
-/* Mostrar el formulario cuando está activo */
-.floating-form.active {
-    opacity: 1;
-    visibility: visible;
-    transform: translate(-50%, -50%) scale(1);
+.modal-dialog {
+    display: flex;
+    align-items: center;
+    min-height: calc(100% - 1rem);
 }
 
 /* Estilos para los campos del formulario */
-.floating-form input[type="text"],
-.floating-form input[type="email"],
-.floating-form input[type="password"],
-.floating-form textarea {
+.modal input[type="text"],
+.modal input[type="email"],
+.modal input[type="password"],
+.modal textarea {
     width: 100%;
     padding: 10px;
     margin-bottom: 15px;
@@ -653,7 +552,7 @@ svg defs linearGradient#gradiente-iconos {
 }
 
 /* Botón de envío */
-.floating-form button {
+.modal button[type="submit"] {
     width: 100%;
     padding: 10px;
     background-color: #044b9c;
@@ -664,56 +563,84 @@ svg defs linearGradient#gradiente-iconos {
     cursor: pointer;
 }
 
-.floating-form button:hover {
+.modal button[type="submit"]:hover {
     background-color: #033876;
 }
 
-/* Estilos para el cierre del formulario */
-.floating-form .close-btn {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background-color: transparent;
-    border: none;
-    font-size: 18px;
-    cursor: pointer;
-    color: #ccc;
-}
-
-.floating-form .close-btn:hover {
-    color: #ff0000;
-}
-
+/* Medidor de fuerza de contraseña */
 #password-strength {
-    height: 10px; /* Altura del medidor */
+    height: 10px;
     border-radius: 5px;
-    display: none; /* Oculto inicialmente */
-    margin-top: 10px; /* Espacio superior */
+    display: none;
+    margin-top: 10px;
 }
+
 .password-strength {
     display: none;
     margin-top: 5px;
     font-size: 14px;
-  }
-  
-  .password-strength.weak {
-    color: red;
-  }
-  
-  .password-strength.medium {
-    color: orange;
-  }
-  
-  .password-strength.strong {
-    color: green;
-  }
-  
+}
 
-  .username {
+.password-strength.weak {
+    color: red;
+}
+
+.password-strength.medium {
+    color: orange;
+}
+
+.password-strength.strong {
+    color: green;
+}
+
+/* Botón de mostrar/ocultar contraseña */
+.input-group .btn-outline-secondary {
+    background-color: #000000;
+    border: 1px solid #ccc;
+}
+
+/* Botón de cambio de formulario */
+#toggle-form {
+    color: #044b9c;
+    text-decoration: none;
+}
+
+#toggle-form:hover {
+    text-decoration: underline;
+}
+
+/* Nombre de usuario */
+.username {
     position: absolute;
     top: 10px;
     right: 20px;
     font-size: 1.2em;
     color: white;
-  }
-  
+}
+.modal-title,
+.form-label {
+    color: black !important;
+    opacity: 1 !important;
+}
+.dropdown-toggle {
+    background-color: #044b9c !important;
+    color: white !important;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+ }
+ 
+ .dropdown-menu {
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+ }
+ 
+ .dropdown-item {
+    color: #044b9c;
+ }
+ 
+ .dropdown-item:hover {
+    background-color: #e9ecef;
+    color: #033876;
+ }

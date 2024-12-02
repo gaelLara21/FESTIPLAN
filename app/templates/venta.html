@@ -10,9 +10,10 @@
     </div>
     <div class="venta-content">
         {% if evento.foto %}
-            <img src="{{ url_for('static', filename=evento.foto.split('static/')[1]) }}" alt="{{ evento.titulo }}" class="venta-imagen">
-        {% endif %}
-        
+        <img src="{{ evento.foto }}" alt="{{ evento.titulo }}">
+            {% endif %}
+            
+        <p>{{ evento.descripcion }}</p>
         <h2>Selecciona tus asientos</h2>
         <div class="asientos-grid">
             {% for fila in range(5) %}
