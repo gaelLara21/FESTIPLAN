@@ -6,17 +6,19 @@
 
 <main>
     <h1>Mis Boletos</h1>
-    <ul>
+    <div class="eventos-grid">
         {% for boleto in boletos %}
-        <li>
-            <p>Evento: {{ boleto['titulo'] }}</p>
-            <p>Fecha: {{ boleto['fecha'] }}</p>
-            <p>Cantidad de boletos: {{ boleto['cantidad'] }}</p>
-            <p>Total pagado: ${{ boleto['total'] }}</p>
-            <img src="{{ boleto['qr_code'] }}" alt="QR del boleto">
-        </li>
+        <div class="evento-card">
+            <img src="{{ boleto['qr_code'] }}" alt="QR del boleto" class="venta-imagen">
+            <div class="evento-card-content">
+                <h2>{{ boleto['titulo'] }}</h2>
+                <p>Fecha: {{ boleto['fecha'] }}</p>
+                <p>Cantidad de boletos: {{ boleto['cantidad'] }}</p>
+                <p>Total pagado: ${{ boleto['total'] }}</p>
+            </div>
+        </div>
         {% endfor %}
-    </ul>
+    </div>
 </main>
 
 <script src="{{ url_for('static', filename='js/jquery-3.5.1.min.js') }}"></script>

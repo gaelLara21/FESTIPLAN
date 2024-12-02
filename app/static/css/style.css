@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
 * {
     margin: 0;
     padding: 0;
@@ -9,7 +10,9 @@
 body {
     font-family: "Open Sans", Arial, sans-serif;
     font-size: 16px; 
-    background-image: linear-gradient(to right, #000000, #044b9c);
+    background-color: var(--color-fondo-oscuro);
+    color: var(--color-texto-principal);
+    line-height: 1.6;
 
 }
 
@@ -365,87 +368,141 @@ header {
     max-height: 600px;
 }
 
-/* Estilos del Carrusel */
+/* Contenedor principal */
 
-.carousel-inner {
-    padding: 1em;
-  }
-  
-  .card-container {
-    display: flex;
-    justify-content: center;
-    gap: 1em;
-    padding: 0em 0;
-  }
-  
-  .card-link {
-    text-decoration: none;
-    color: inherit;
-  }
-  
-  .card {
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 200px;
-    padding: 1em;
+/* Variables de color */
+:root {
+    --color-fondo-oscuro: #0f172a;
+    --color-tarjeta: #1e293b;
+    --color-texto-principal: #ffffff;
+    --color-texto-secundario: #cbd5e1;
+    --gradiente-primario: linear-gradient(45deg, #3b82f6, #8b5cf6);
+    --sombra-tarjeta: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    --sombra-tarjeta-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+}
+.eventos-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 4rem 1rem;
+    width: 100%;
+}
+
+.eventos-titulo {
     text-align: center;
-    transition: transform 0.3s ease;
-  }
-  
-  .card:hover {
-    transform: translateY(-5px);
-  }
-  
-  .icon-circle {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background-color: #f0f0f0;
+    margin-bottom: 3rem;
+    padding: 0 1rem;
+}
+
+.eventos-titulo h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: var(--gradiente-primario);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 1rem;
+}
+
+.eventos-titulo p {
+    color: var(--color-texto-secundario);
+    max-width: 800px;
+    margin: 0 auto;
+    font-size: 1.125rem;
+}
+
+.eventos-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
+
+.evento-card {
+    background: linear-gradient(145deg, var(--color-tarjeta) 0%, #111827 100%);
+    border-radius: 1rem;
+    padding: 2rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+}
+
+.evento-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+}
+
+.evento-icono {
+    margin-bottom: 1.5rem;
+    display: flex;
     align-items: center;
-    margin: 0 auto 0.5em;
-  }
-  
-  .icon {
-    font-size: 30px;
-  }
-  
-  .category {
-    font-weight: bold;
-    margin-bottom: 0.5em;
-  }
-  
-  .description {
-    font-size: 12px;
-  }
-  
-  .carousel-control-prev,
-  .carousel-control-next {
-    width: 5%;
-    background-color: rgba(0, 0, 0, 0.2);
-  }
-  
-  .carousel-control-prev-icon,
-  .carousel-control-next-icon {
-    background-color: rgba(0, 0, 0, 0.5);
-    border-radius: 50%;
-    padding: 10px;
-  }
-  
-  @media (max-width: 768px) {
-    .card-container {
-      flex-direction: column;
-      align-items: center;
+}
+
+/* Estilos específicos para cada icono */
+.evento-card:nth-child(1) .evento-icono svg {
+    stroke: var(--color-icono-1);
+}
+
+.evento-card:nth-child(2) .evento-icono svg {
+    stroke: var(--color-icono-2);
+}
+
+.evento-card:nth-child(3) .evento-icono svg {
+    stroke: var(--color-icono-3);
+}
+
+.evento-icono svg {
+    width: 48px;
+    height: 48px;
+    stroke-width: 2;
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2));
+}
+
+.evento-card h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--color-texto-principal);
+}
+
+.evento-card p {
+    color: var(--color-texto-secundario);
+    flex-grow: 1;
+}
+
+@media (max-width: 1024px) {
+    .eventos-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
-    
-    .card {
-      width: 80%;
-      max-width: 300px;
-      margin-bottom: 1em;
+}
+
+@media (max-width: 640px) {
+    .eventos-grid {
+        grid-template-columns: 1fr;
     }
-  }
+
+    .eventos-titulo h2 {
+        font-size: 2rem;
+    }
+}
+
+/* Utilidades */
+.oculto {
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+}
+
+/* Gradiente SVG para iconos */
+svg {
+    overflow: visible;
+}
+
+/* Gradiente definido para usar en SVG */
+svg defs linearGradient#gradiente-iconos {
+    --color-inicio: #3b82f6;
+    --color-fin: #8b5cf6;
+}
 
 /* Estilos para el menú desplegable */
 .menu-icon {

@@ -1,31 +1,33 @@
-{% extends 'baseExtend.html' %}
+{% extends 'baseBol.html' %}
 
 {% block title %}Eventos{% endblock %}
 
 {% block content %}
 
 <main>
-    <h1>Eventos</h1>
-    <div>
+    <h1>Eventos Disponibles</h1>
+    <div class="eventos-grid">
         {% for evento in eventos %}
-            <div>
-                <h2>{{ evento.titulo }}</h2>
-                <p>{{ evento.descripcion }}</p>
-                <p>Fecha: {{ evento.fecha }}</p>
-                <p>Capacidad: {{ evento.capacidad }}</p>
-                <p>Costo: ${{ evento.costo }}</p>
-                <p>Categoría: {{ evento.categoria }}</p>
+            <div class="evento-card">
                 {% if evento.foto %}
-                    <img src="{{ evento.foto }}" alt="{{ evento.titulo }}" width="200">
+                    <img src="{{ evento.foto }}" alt="{{ evento.titulo }}">
                 {% endif %}
-                
-                <!-- Botón para adquirir boletos -->
-                <a href="{{ url_for('venta', id_evento=evento.id_evento) }}" class="btn">Adquirir boletos</a>
+                <div class="evento-card-content">
+                    <h2>{{ evento.titulo }}</h2>
+                    <p>{{ evento.descripcion }}</p>
+                    <p>Fecha: {{ evento.fecha }}</p>
+                    <p>Costo: ${{ evento.costo }}</p>
+                </div>
+                <div class="evento-card-actions">
+                    <a href="{{ url_for('venta', id_evento=evento.id_evento) }}" class="btn">Adquirir boletos</a>
+                    {% if 'mis_eventos' in request.endpoint %}
+                        <a href="{{ url_for('editar_evento', id_evento=evento.id_evento) }}" class="btn">Editar</a>
+                    {% endif %}
+                </div>
             </div>
         {% endfor %}
     </div>
 </main>
-
 <script src="{{ url_for('static', filename='js/jquery-3.5.1.min.js') }}"></script>
 
 {% endblock %}

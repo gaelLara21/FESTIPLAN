@@ -1,45 +1,64 @@
-{% extends 'baseExtend.html' %}
+{% extends 'baseBol.html' %}
 
 {% block title %}Compra de Boletos{% endblock %}
 
 {% block content %}
 
-<main>
-    <h1>Compra de Boletos para {{ evento.titulo }}</h1>
-    
-    <div>
-        <h2>{{ evento.titulo }}</h2>
-        <p>{{ evento.descripcion }}</p>
-        <p>Fecha: {{ evento.fecha }}</p>
-        <p>Capacidad restante: {{ evento.capacidad }}</p>
-        <p>Costo por boleto: ${{ evento.costo }}</p>
-        
-        {% if evento.foto %}
-            <!-- Cargar imagen desde static/uploads -->
-            <img src="{{ url_for('static', filename=evento.foto.split('static/')[1]) }}" alt="{{ evento.titulo }}" width="200">
-        {% else %}
-            <p>Imagen no disponible</p>
-        {% endif %}
+<main class="venta-container">
+    <div class="venta-header">
+        <h1>Compra de Boletos para {{ evento.titulo }}</h1>
     </div>
-
-    <form method="POST" action="{{ url_for('venta', id_evento=evento.id_evento) }}">
-        <div>
-            <label for="cantidad">Cantidad de boletos:</label>
-            <input type="number" id="cantidad" name="cantidad" min="1" max="{{ evento.capacidad }}" required>
+    <div class="venta-content">
+        {% if evento.foto %}
+            <img src="{{ url_for('static', filename=evento.foto.split('static/')[1]) }}" alt="{{ evento.titulo }}" class="venta-imagen">
+        {% endif %}
+        
+        <h2>Selecciona tus asientos</h2>
+        <div class="asientos-grid">
+            {% for fila in range(5) %}
+                {% for columna in range(10) %}
+                    <button class="asiento" data-fila="{{ fila }}" data-columna="{{ columna }}">
+                        {{ fila }}{{ columna }}
+                    </button>
+                {% endfor %}
+            {% endfor %}
         </div>
 
-        <button type="submit">Comprar Boletos</button>
-    </form>
-
-    {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-            <ul>
-                {% for category, message in messages %}
-                    <li class="{{ category }}">{{ message }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-    {% endwith %}
+        <form method="POST" action="{{ url_for('venta', id_evento=evento.id_evento) }}">
+            <input type="hidden" name="asientos_seleccionados" id="asientos-input">
+            <div>
+                <label for="cantidad">Cantidad de boletos:</label>
+                <input type="number" id="cantidad" name="cantidad" min="1" max="{{ evento.capacidad }}" required>
+            </div>
+            <button type="submit" class="btn-comprar">Comprar Boletos</button>
+        </form>
+    </div>
 </main>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const asientos = document.querySelectorAll('.asiento');
+    const asientosInput = document.getElementById('asientos-input');
+    const seleccionados = new Set();
+
+    asientos.forEach(asiento => {
+        asiento.addEventListener('click', () => {
+            if (!asiento.classList.contains('ocupado')) {
+                asiento.classList.toggle('seleccionado');
+                const asientoId = `${asiento.dataset.fila}${asiento.dataset.columna}`;
+                
+                if (seleccionados.has(asientoId)) {
+                    seleccionados.delete(asientoId);
+                } else {
+                    seleccionados.add(asientoId);
+                }
+
+                asientosInput.value = Array.from(seleccionados).join(',');
+                document.getElementById('cantidad').value = seleccionados.size;
+            }
+        });
+    });
+});
+</script>
 
 {% endblock %}
