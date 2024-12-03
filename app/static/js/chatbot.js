@@ -30,7 +30,7 @@ chatbotSend.addEventListener('click', () => {
         // Simular respuesta automática
         setTimeout(() => {
             const botBubble = document.createElement('div');
-            botBubble.textContent = 'Hola, ¿cómo puedo ayudarte?';
+            botBubble.textContent = 'Hola ¡Soy Festy-Bot 🎉! ¿cómo puedo ayudarte?';
             botBubble.style.textAlign = 'left';
             botBubble.style.margin = '5px 0';
             chatbotMessages.appendChild(botBubble);

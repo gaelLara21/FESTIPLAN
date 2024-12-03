@@ -645,7 +645,7 @@ svg defs linearGradient#gradiente-iconos {
     color: #033876;
  }
  
- /* Botón de cambio de formulario */
+ /* Estilos ChatBot*/
  #chatbot-container {
     position: fixed;
     bottom: 20px;
@@ -718,4 +718,38 @@ svg defs linearGradient#gradiente-iconos {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+}
+
+
+/* Botón flotante Scroll */
+.scroll-to-top {
+    position: fixed;
+    bottom: 100px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: #044b9c;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    font-size: 24px;
+    text-align: center;
+    line-height: 50px;
+    cursor: pointer;
+    display: none; /* Por defecto oculto */
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Mostrar el botón en pantallas grandes */
+@media (min-width: 768px) {
+    .scroll-to-top {
+        display: block;
+    }
+}
+
+/* Hover para pantallas grandes */
+.scroll-to-top:hover {
+    background-color: #0356a0;
+    transform: scale(1.1);
 }

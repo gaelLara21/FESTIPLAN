@@ -1,4 +1,4 @@
-from flask import Flask, redirect, render_template, request, url_for, flash, session, send_file
+from flask import Flask, redirect, render_template, request, url_for, flash, session, send_file, jsonify
 import mysql.connector
 from werkzeug.security import generate_password_hash, check_password_hash
 import os
@@ -7,6 +7,7 @@ from datetime import datetime
 import qrcode
 from io import BytesIO
 import base64
+import openai
 
 app=Flask(__name__)
 app.secret_key = 'supersecreto'
@@ -20,6 +21,13 @@ db = mysql.connector.connect(
     database="festyplan"
 )
 cursor = db.cursor(dictionary=True)
+
+
+############# Ruta del ChatBot ##################
+
+
+
+############# Termina Ruta del ChatBot ##################
 
 ###################### Rutas conectadas a base de Datos ######################################
 
@@ -175,6 +183,7 @@ def terminos():
 @app.route('/galeria')
 def galeria():
     return render_template('galeria.html')
+
 
 ############# Rutas de los eventos ##################
 
