@@ -18,7 +18,13 @@
                     <p>Costo: ${{ evento.costo }}</p>
                 </div>
                 <div class="evento-card-actions">
-                    <a href="{{ url_for('venta', id_evento=evento.id_evento) }}" class="btn">Adquirir boletos</a>
+                    {% if session.get('user_id') %}
+                        <!-- Usuario logueado: redirigir a la página de compra -->
+                        <a href="{{ url_for('venta', id_evento=evento.id_evento) }}" class="btn">Adquirir boletos</a>
+                    {% else %}
+                        <!-- Usuario no logueado: mostrar alerta -->
+                        <button class="btn" onclick="mostrarAlerta()">Adquirir boletos</button>
+                    {% endif %}
                     {% if 'mis_eventos' in request.endpoint %}
                         <a href="{{ url_for('editar_evento', id_evento=evento.id_evento) }}" class="btn">Editar</a>
                     {% endif %}
@@ -26,7 +32,40 @@
             </div>
         {% endfor %}
     </div>
+
+    {% if not session.get('user_id') %}
+    <!-- Modal para alerta -->
+    <div id="alert-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="cerrarModal()">&times;</span>
+            <p>Para adquirir boletos debes iniciar sesión.</p>
+        </div>
+    </div>
+
+    <!-- Script para manejar el modal -->
+    <script>
+        function mostrarAlerta() {
+            const modal = document.getElementById("alert-modal");
+            modal.style.display = "block";
+        }
+
+        function cerrarModal() {
+            const modal = document.getElementById("alert-modal");
+            modal.style.display = "none";
+        }
+
+        // Cerrar el modal si se hace clic fuera de él
+        window.onclick = function(event) {
+            const modal = document.getElementById("alert-modal");
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        };
+    </script>
+    {% endif %}
 </main>
+
+
 <script src="{{ url_for('static', filename='js/jquery-3.5.1.min.js') }}"></script>
 
 {% endblock %}

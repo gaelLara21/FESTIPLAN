@@ -5,7 +5,6 @@
 {% block content %}
 
 <main>
-
     <h1>Crear Evento con Festy Plan</h1>
     <form method="POST" enctype="multipart/form-data">
         <label>Nombre del evento:</label><br>
@@ -15,7 +14,7 @@
         <textarea name="descripcion" required></textarea><br><br>
 
         <label>Fecha:</label><br>
-        <input type="datetime-local" name="fecha" required><br><br>
+        <input type="datetime-local" name="fecha" id="fecha" required><br><br>
 
         <label>Capacidad de boletos:</label><br>
         <input type="number" name="capacidad" min="1" required><br><br>
@@ -38,6 +37,20 @@
     </form>
 </main>
 
+<script>
+    // Establecer la fecha mínima en el input de fecha
+    const fechaInput = document.getElementById('fecha');
+    const ahora = new Date();
+    const anio = ahora.getFullYear();
+    const mes = String(ahora.getMonth() + 1).padStart(2, '0'); // Mes en formato 'MM'
+    const dia = String(ahora.getDate()).padStart(2, '0'); // Día en formato 'DD'
+    const horas = String(ahora.getHours()).padStart(2, '0'); // Horas en formato 'HH'
+    const minutos = String(ahora.getMinutes()).padStart(2, '0'); // Minutos en formato 'MM'
+
+    // Formato 'YYYY-MM-DDTHH:MM'
+    const fechaMinima = `${anio}-${mes}-${dia}T${horas}:${minutos}`;
+    fechaInput.min = fechaMinima;
+</script>
 
 <script src="{{ url_for('static', filename='js/jquery-3.5.1.min.js') }}"></script>
 

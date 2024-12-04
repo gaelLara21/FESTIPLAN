@@ -58,7 +58,7 @@ def venta(id_evento):
     # Obtener información del evento, asegurándose de que la ruta de la imagen sea correcta
     cursor.execute("""
         SELECT id_evento, titulo, descripcion, fecha, capacidad, costo, 
-               CONCAT('static/uploads/', foto) AS foto
+               CONCAT('/', foto) AS foto
         FROM eventos WHERE id_evento = %s
     """, (id_evento,))
     evento = cursor.fetchone()
@@ -145,7 +145,9 @@ def login():
         user = cursor.fetchone()
 
         if user and check_password_hash(user['password'], password):
+            # Establecer las variables de sesión
             session['user_id'] = user['id_user']
+            session['user_name'] = user['name']  # Opcional: guardar el nombre del usuario
             flash('Inicio de sesión exitoso', 'success')
             return redirect(url_for('index'))
         else:
