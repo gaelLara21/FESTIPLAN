@@ -210,7 +210,7 @@ form textarea {
 }
 
 form button {
-    background-color: #663304;
+    background-color: #310a64;
     color: white;
     border: none;
     padding: 0.75rem;
@@ -222,7 +222,8 @@ form button {
 }
 
 form button:hover {
-    background-color: #0356a0;
+    background-color: #6aaa22; /* Fondo ligeramente más oscuro al pasar el mouse */
+    transform: scale(1.05); /* Agrandar un poco el botón al hacer hover */
 }
 
 form input[type="file"] {
@@ -335,15 +336,40 @@ main h1 {
 .btn {
     display: inline-block;
     padding: 0.5rem 1rem;
-    background-color: #044b9c;
+    background-color: #310a64;
     color: white;
     border-radius: 5px;
     transition: background-color 0.3s ease;
     text-align: center;
 }
-
 .btn:hover {
-    background-color: #0356a0;
+    background-color: #6aaa22; /* Fondo ligeramente más oscuro al pasar el mouse */
+    transform: scale(1.05); /* Agrandar un poco el botón al hacer hover */
+}
+
+
+/* Estilos para el botón */
+.btn-editar {
+    display: inline-block;
+    padding: 8px 20px; /* Ajustamos el padding vertical */
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    background-color: #4CAF50; /* Color de fondo verde */
+    color: white; /* Color del texto */
+    border: none;
+    border-radius: 5px; /* Bordes redondeados */
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn-editar:hover {
+    background-color: #45a049; /* Fondo ligeramente más oscuro al pasar el mouse */
+    transform: scale(1.05); /* Agrandar un poco el botón al hacer hover */
+}
+
+.btn-editar:active {
+    background-color: #388e3c; /* Fondo más oscuro al hacer clic */
+    transform: scale(1); /* Vuelve al tamaño original al hacer clic */
 }
 
 /* Estilos para Venta de Boletos */
@@ -370,13 +396,29 @@ main h1 {
 .venta-content {
     padding: 2rem;
 }
-
-.venta-imagen {
-    max-width: 100%;
-    height: 300px;
-    object-fit: cover;
+.evento-imagen-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding: 0 1rem; /* Añade un poco de padding horizontal */
 }
 
+.venta-imagen {
+    max-width: 100%; 
+    max-height: 400px; /* Aumenté un poco la altura máxima */
+    width: auto;
+    height: auto;
+    object-fit: cover;
+    border-radius: 12px; /* Bordes más redondeados */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Sombra algo más pronunciada */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.venta-imagen:hover {
+    transform: scale(1.03); /* Zoom ligeramente más suave */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada al hacer hover */
+}
 .asientos-grid {
     display: grid;
     grid-template-columns: repeat(10, 1fr);
@@ -497,3 +539,171 @@ main h1 {
     font-size: 16px;
     color: #333;
 }
+
+.payment-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.payment-container {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 450px;
+    padding: 30px;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.payment-title {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #666;
+    font-weight: bold;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    transition: border-color 0.3s;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: #4CAF50;
+}
+
+.country-input-wrapper {
+    position: relative;
+}
+
+.country-flag {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    pointer-events: none;
+}
+
+.card-details {
+    display: flex;
+    gap: 15px;
+}
+
+.card-details > div {
+    flex: 1;
+}
+
+.btn-submit {
+    width: 100%;
+    padding: 12px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 16px;
+}
+
+.btn-submit:hover {
+    background-color: #45a049;
+}
+
+.btn-submit:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+.error-message {
+    color: #ff4444;
+    font-size: 0.8em;
+    margin-top: 5px;
+    display: none;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 25px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.card-number-wrapper {
+    position: relative;
+}
+
+#cardType {
+    display: none;
+    margin-top: 5px;
+    font-size: 0.8em;
+    color: #666;
+}
+
+    /* Estilos para el modal */
+    .modal {
+        display: none;  /* Oculto por defecto */
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7); /* Fondo oscuro */
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* Estilo para la imagen del QR en el modal */
+    .modal img {
+        max-width: 80%;
+        max-height: 80%;
+    }
+
+    /* Botón para cerrar el modal */
+    .cerrar {
+        color: white;
+        font-size: 36px;
+        font-weight: bold;
+        position: absolute;
+        top: 15px;
+        right: 25px;
+        cursor: pointer;
+    }
+
+    .cerrar:hover {
+        color: #f44336;
+    }

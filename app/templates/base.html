@@ -17,17 +17,12 @@
     <header>
     <div class="contenedor">
       {% if session['user_id'] %}
-      <a href="{{ url_for('logout') }}" class="menu-link">Cerrar Sesión</a>
-      <a href="{{ url_for('contacto') }}" class="menu-link">Contacto</a>
-      <a href="{{ url_for('nosotros') }}" class="menu-link">Nosotros</a>
       <a href="{{ url_for('eventos') }}" class="menu-link">Eventos</a>
       <a href="{{ url_for('mis_boletos') }}" class="menu-link">Tus Boletos</a>
-      <a href="{{ url_for('mis_boletos') }}" class="menu-link">Tus Eventos</a>
+      <a href="{{ url_for('mis_eventos') }}" class="menu-link">Tus Eventos</a>
+      <a href="{{ url_for('logout') }}" class="menu-link">Cerrar Sesión</a>
       <span class="username">{{ session['name'] in session and session['name'] or '' }}</span>
       {% else %}
-
-      <a href="{{ url_for('contacto') }}" class="menu-link">Contacto</a>
-      <a href="{{ url_for('nosotros') }}" class="menu-link">Nosotros</a>
       <a href="{{ url_for('eventos') }}" class="menu-link">Eventos</a>
       <a href="#" class="login-btn" data-bs-toggle="modal" data-bs-target="#loginModal">
         Iniciar Sesión
@@ -67,7 +62,6 @@
                 <label for="login-password" class="form-label">Contraseña</label>
                 <div class="input-group">
                   <input type="password" name="password" class="form-control" id="login-password" placeholder="Ingresa tu contraseña" required>
-                  <button class="btn btn-outline-secondary" type="button" id="toggle-login-password">Mostrar</button>
                 </div>
               </div>
               <button type="submit" class="btn btn-primary w-100">Iniciar Sesión</button>
@@ -91,7 +85,6 @@
                 <label for="signup-password" class="form-label">Contraseña</label>
                 <div class="input-group">
                   <input type="password" name="password" class="form-control" id="signup-password" placeholder="Crea una contraseña" required>
-                  <button class="btn btn-outline-secondary" type="button" id="toggle-signup-password">Mostrar</button>
                 </div>
               </div>
               <button type="submit" class="btn btn-success w-100">Registrarse</button>
@@ -120,6 +113,7 @@
                   <div class="col-xl-6 col-lg-6 text-right">
                       <div class="footer-menu">
                           <ul>
+                            <li><a href="{{ url_for('aviso')}}">Aviso de Privacidad</a></li>
                               <li><a href="{{ url_for('contacto')}}">Contacto</a></li>
                               <li><a href="{{ url_for('nosotros')}}">Nosotros</a></li>
                               <li><a href="{{ url_for('terminos')}}">Términos y Condiciones</a></li>

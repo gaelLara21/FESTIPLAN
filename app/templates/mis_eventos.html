@@ -21,7 +21,9 @@
                     <p>Categoría: {{ evento.categoria }}</p>
                 </div>
                 <div class="evento-card-actions">
-                    <a href="{{ url_for('editar_evento', id_evento=evento.id_evento) }}" class="btn btn-editar">Editar</a>
+                    <form action="{{ url_for('editar_evento', id_evento=evento.id_evento) }}" method="GET">
+                        <button type="submit" class="btn btn-editar">Editar</button>
+                    </form>
                     <form action="{{ url_for('eliminar_evento', id_evento=evento.id_evento) }}" method="POST" class="form-eliminar" style="display:inline;">
                         <button type="submit" class="btn btn-eliminar">Eliminar</button>
                     </form>

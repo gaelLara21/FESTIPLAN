@@ -55,7 +55,7 @@ def venta(id_evento):
         flash("Debes iniciar sesión para comprar boletos", "error")
         return redirect(url_for('index'))
     
-    # Obtener información del evento, asegurándose de que la ruta de la imagen sea correcta
+    # Obtener información del evento
     cursor.execute("""
         SELECT id_evento, titulo, descripcion, fecha, capacidad, costo, 
                CONCAT('/', foto) AS foto
@@ -77,25 +77,31 @@ def venta(id_evento):
             flash("No hay suficientes boletos disponibles", "error")
             return redirect(url_for('venta', id_evento=id_evento))
 
-        # Generar código QR único para la transacción
-        datos_transaccion = f"Evento: {evento['titulo']}\nUsuario: {user_id}\nCantidad: {cantidad}\nTotal: {total}"
-        qr = qrcode.make(datos_transaccion)
-        qr_filename = f"static/qrs/qr_{datetime.now().strftime('%Y%m%d%H%M%S')}.png"
-        qr.save(qr_filename)
+        # Si el costo es 0, generar QR directamente
+        if evento['costo'] == 0:
+            # Generar código QR único para la transacción
+            datos_transaccion = f"Evento: {evento['titulo']}\nUsuario: {user_id}\nCantidad: {cantidad}\nTotal: {total}"
+            qr = qrcode.make(datos_transaccion)
+            qr_filename = f"static/qrs/qr_{datetime.now().strftime('%Y%m%d%H%M%S')}.png"
+            qr.save(qr_filename)
 
-        # Insertar boletos en la base de datos
-        cursor.execute("""
-            INSERT INTO boletos (id_user, id_evento, cantidad, qr_code) VALUES (%s, %s, %s, %s)
-        """, (user_id, id_evento, cantidad, qr_filename))
-        db.commit()
+            # Insertar boletos en la base de datos
+            cursor.execute("""
+                INSERT INTO boletos (id_user, id_evento, cantidad, qr_code) VALUES (%s, %s, %s, %s)
+            """, (user_id, id_evento, cantidad, qr_filename))
+            db.commit()
 
-        # Actualizar capacidad restante del evento
-        nueva_capacidad = evento['capacidad'] - cantidad
-        cursor.execute("UPDATE eventos SET capacidad = %s WHERE id_evento = %s", (nueva_capacidad, id_evento))
-        db.commit()
+            # Actualizar capacidad restante del evento
+            nueva_capacidad = evento['capacidad'] - cantidad
+            cursor.execute("UPDATE eventos SET capacidad = %s WHERE id_evento = %s", (nueva_capacidad, id_evento))
+            db.commit()
 
-        flash("Compra realizada con éxito", "success")
-        return redirect(url_for('mis_boletos'))
+            flash("Compra realizada con éxito", "success")
+            return redirect(url_for('mis_boletos'))
+        
+        # Si el costo es mayor a 0, redirigir a página de pago
+        else:
+            return redirect(url_for('pay', id_evento=id_evento, cantidad=cantidad))
 
     return render_template('venta.html', evento=evento)
 
@@ -182,10 +188,19 @@ def nosotros():
 def terminos():
     return render_template('terminos.html')
 
-@app.route('/galeria')
-def galeria():
-    return render_template('galeria.html')
+@app.route('/aviso')
+def aviso():
+    return render_template('aviso.html')
 
+@app.route('/pago/<int:id_evento>/<int:cantidad>', methods=['GET', 'POST'])
+def pay(id_evento, cantidad):
+    # Obtener detalles del evento
+    cursor.execute("SELECT titulo, costo FROM eventos WHERE id_evento = %s", (id_evento,))
+    evento = cursor.fetchone()
+    
+    total = evento['costo'] * cantidad
+    
+    return render_template('pay.html', evento=evento, cantidad=cantidad, total=total)
 
 ############# Rutas de los eventos ##################
 
@@ -249,7 +264,15 @@ def mis_eventos():
         user_id = session['user_id']
         cursor.execute("SELECT * FROM eventos WHERE id_user = %s", (user_id,))
         eventos = cursor.fetchall()
-        return render_template('mis_eventos.html', eventos=eventos)
+
+        # Crear una lista de eventos con datos necesarios
+        eventos_lista = [{"titulo": evento[1], "fecha": evento[6], "id_evento": evento[0]} for evento in eventos]
+
+        # Si se hace una petición JSON, respondemos con los datos en formato JSON
+        if request.is_xhr:
+            return jsonify(eventos_lista)
+        else:
+            return render_template('mis_eventos.html', eventos=eventos)
     else:
         return redirect(url_for('index'))
 

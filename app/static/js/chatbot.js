@@ -1,44 +1,62 @@
-// Variables
-const chatbotButton = document.getElementById('chatbot-button');
-const chatbotWindow = document.getElementById('chatbot-window');
-const chatbotClose = document.getElementById('chatbot-close');
-const chatbotMessages = document.getElementById('chatbot-messages');
-const chatbotInput = document.getElementById('chatbot-input');
-const chatbotSend = document.getElementById('chatbot-send');
+const chatbotButton = document.getElementById("chatbot-button");
+const chatbotWindow = document.getElementById("chatbot-window");
+const chatbotClose = document.getElementById("chatbot-close");
+const chatbotSend = document.getElementById("chatbot-send");
+const chatbotInput = document.getElementById("chatbot-input");
+const chatbotMessages = document.getElementById("chatbot-messages");
 
-// Abrir el chatbot
-chatbotButton.addEventListener('click', () => {
-    chatbotWindow.style.display = 'block';
+// Mostrar/ocultar el chatbot
+chatbotButton.addEventListener("click", () => {
+    chatbotWindow.style.display = "block";
 });
 
-// Cerrar el chatbot
-chatbotClose.addEventListener('click', () => {
-    chatbotWindow.style.display = 'none';
+chatbotClose.addEventListener("click", () => {
+    chatbotWindow.style.display = "none";
 });
 
-// Enviar mensajes
-chatbotSend.addEventListener('click', () => {
-    const userMessage = chatbotInput.value;
-    if (userMessage.trim() !== '') {
-        // Mostrar el mensaje del usuario
-        const userBubble = document.createElement('div');
-        userBubble.textContent = userMessage;
-        userBubble.style.textAlign = 'right';
-        userBubble.style.margin = '5px 0';
-        chatbotMessages.appendChild(userBubble);
+// Función para enviar un mensaje
+function sendMessage(message, fromUser = false) {
+    const messageDiv = document.createElement("div");
+    messageDiv.classList.add(fromUser ? "user-message" : "bot-message");
+    messageDiv.innerHTML = message;
+    chatbotMessages.appendChild(messageDiv);
+    chatbotMessages.scrollTop = chatbotMessages.scrollHeight;  // Auto-scroll
+}
 
-        // Simular respuesta automática
-        setTimeout(() => {
-            const botBubble = document.createElement('div');
-            botBubble.textContent = 'Hola ¡Soy Festy-Bot 🎉! ¿cómo puedo ayudarte?';
-            botBubble.style.textAlign = 'left';
-            botBubble.style.margin = '5px 0';
-            chatbotMessages.appendChild(botBubble);
-
-            // Desplazar hacia abajo
-            chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-        }, 1000);
-
-        chatbotInput.value = '';
+// Función para obtener respuesta del chatbot (simulando el comportamiento con eventos)
+chatbotSend.addEventListener("click", () => {
+    const userMessage = chatbotInput.value.trim();
+    if (userMessage) {
+        sendMessage(userMessage, true);
+        chatbotInput.value = "";
+        
+        // Simulamos la respuesta del chatbot
+        if (userMessage.toLowerCase().includes("eventos")) {
+            sendMessage("¿Te gustaría saber más sobre nuestros eventos? ¿Cuál te interesa?");
+        } else if (userMessage.toLowerCase().includes("crear evento")) {
+            sendMessage("¡Genial! Para crear un evento, necesitas estar registrado. ¿Te gustaría registrarte?");
+        } else if (userMessage.toLowerCase().includes("mis eventos")) {
+            $.ajax({
+                url: "/mis_eventos",
+                type: "GET",
+                success: function(data) {
+                    if (data.length > 0) {
+                        data.forEach(evento => {
+                            sendMessage(`Evento: ${evento.titulo}, Fecha: ${evento.fecha}`);
+                        });
+                    } else {
+                        sendMessage("Aún no tienes eventos creados.");
+                    }
+                },
+                error: function() {
+                    sendMessage("Lo siento, hubo un problema al obtener tus eventos.");
+                }
+            });
+        } else {
+            sendMessage("Lo siento, no entendí tu solicitud. ¿Puedes reformular?");
+        }
     }
 });
+
+// Opcional: puedes agregar un mensaje de bienvenida
+sendMessage("Hola, soy Festy-Bot 🤖. ¿En qué puedo ayudarte hoy?");

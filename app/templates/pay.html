@@ -1,0 +1,70 @@
+{% extends 'baseBol.html' %}
+
+{% block title %}Pago{% endblock %}
+
+{% block content %}
+<div class="payment-wrapper">
+    <div class="payment-container">
+        <h2 class="payment-title">Pago con Tarjeta</h2>
+        <form id="paymentForm">
+            <div class="form-group country-select">
+                <label for="country">País</label>
+                <div class="country-input-wrapper">
+                    <select id="country" name="country" class="form-control" required>
+                        <option value="">Selecciona tu país</option>
+                        <option value="ES" data-flag="🇪🇸">España</option>
+                        <option value="US" data-flag="🇺🇸">Estados Unidos</option>
+                        <option value="MX" data-flag="🇲🇽">México</option>
+                        <option value="AR" data-flag="🇦🇷">Argentina</option>
+                        <option value="CO" data-flag="🇨🇴">Colombia</option>
+                        <option value="CL" data-flag="🇨🇱">Chile</option>
+                        <option value="PE" data-flag="🇵🇪">Perú</option>
+                        <option value="BR" data-flag="🇧🇷">Brasil</option>
+                    </select>
+                    <span class="country-flag" id="countryFlag">🌍</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="cardName">Nombre en la Tarjeta</label>
+                <input type="text" id="cardName" name="cardName" class="form-control" placeholder="Nombre Completo" required>
+                <div id="cardNameError" class="error-message">Ingrese un nombre válido</div>
+            </div>
+
+            <div class="form-group card-number-wrapper">
+                <label for="cardNumber">Número de Tarjeta</label>
+                <input type="text" id="cardNumber" name="cardNumber" class="form-control" placeholder="1234 5678 9012 3456" maxlength="19" required>
+                <div id="cardType"></div>
+                <div id="cardNumberError" class="error-message">Número de tarjeta inválido</div>
+                <div class="card-icon" id="cardIcon"></div>
+            </div>
+
+            <div class="card-details">
+                <div class="form-group">
+                    <label for="expDate">Fecha de Expiración</label>
+                    <input type="text" id="expDate" name="expDate" class="form-control" placeholder="MM/AA" maxlength="5" required>
+                    <div id="expDateError" class="error-message">Fecha inválida</div>
+                </div>
+                <div class="form-group">
+                    <label for="cvv">CVV</label>
+                    <input type="text" id="cvv" name="cvv" class="form-control" placeholder="123" maxlength="4" required>
+                    <div id="cvvError" class="error-message">CVV inválido</div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="amount">Monto a Pagar</label>
+                <input type="number" id="amount" name="amount" class="form-control" placeholder="Monto en euros" min="0" step="0.01" required>
+                <div id="amountError" class="error-message">Monto inválido</div>
+            </div>
+
+            <button type="submit" id="submitBtn" class="btn-submit">Pagar Ahora</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/payment.css') }}">
+<script src="{{ url_for('static', filename='js/payment.js') }}"></script>
+{% endblock %}

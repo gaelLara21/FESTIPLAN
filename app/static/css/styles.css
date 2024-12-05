@@ -86,56 +86,34 @@ a{
 }
 /*Estilos del Navbar*/
 .custom-navbar {
-    background-image: linear-gradient(to right, #292725, #292725);
-  }
-  
-  .custom-navbar .nav-link,
-  .custom-navbar .navbar-brand,
-  .custom-navbar .navbar-toggler-icon {
-    color: white;
-  }
-  .form-control {
-    background-color: #5c009900; 
-    color: #ffffff; 
-    text-decoration: rgb(255, 255, 255);
-    border: 2px solid #ffffff;
-    border-radius: 5px 0 0 5px; 
+    background-color: #333;
 }
-.btn-outline-success {
-    background-color: transparent; 
-    border-color: #ffffff; 
-    color: #ffffff; 
-    padding: 10px;
-    display: flex; 
-    align-items: center; 
-    border-radius: 0 5px 5px 0;
-}
-.btn-outline-success:hover {
-    background-color: rgb(255, 255, 255);
-    color: #ffffff; 
-}
-.btn-outline-success:focus {
-    background-color: transparent; 
-    outline: none; 
-}
-.fa-search {
-    font-size: 1.2em; 
-}
-.form-control:focus {
-    background-color: transparent; 
-    outline: none; 
-}
+
 .navbar-brand {
-    font-family: "Open Sans", Arial, sans-serif;
-    font-weight: 150;
-    font-size: 46px;
-  }
-  
-  .nav-item{
-      font-family: "Open Sans", Arial, sans-serif;
-      font-weight: 1500;
-      font-size: 18px;
-  }
+    font-weight: bold;
+    color: #fff !important;
+    font-size: 1.5rem;
+}
+
+.navbar-nav .nav-link {
+    color: #fff !important;
+    font-size: 1rem;
+}
+
+.navbar-toggler {
+    border-color: #fff;
+}
+
+.navbar-toggler-icon {
+    color: #fff;
+}
+
+@media (max-width: 99px) {
+    .navbar-nav {
+        text-align: center;
+    }
+}
+
 
  /* Estilos generales para el formulario de contacto */
 .container-contacto {
@@ -293,4 +271,69 @@ form #button-contacto:hover {
 
 .enlace-terminos:hover {
     color: #f5a623;
+}
+
+/* Estilo para mejorar la legibilidad en dispositivos móviles */
+@media (max-width: 768px) {
+    .aviso-privacidad-contenido {
+        padding: 20px 10%;
+    }
+
+    h2 {
+        font-size: 1.4em;
+    }
+
+    p {
+        font-size: 1em;
+    }
+
+    ul li {
+        font-size: 1em;
+    }
+}
+
+
+h1 {
+    font-size: 2.5em;
+    margin: 0;
+}
+
+p {
+    font-size: 1em;
+    margin: 10px 0 0;
+}
+
+.aviso-privacidad-contenido {
+    padding: 30px 15%;
+    line-height: 1.8;
+}
+
+h2 {
+    font-size: 1.6em;
+    color: #ffffff; /* Color naranja para los títulos de las secciones */
+    margin-top: 30px;
+}
+
+p {
+    font-size: 1.1em;
+    margin-bottom: 15px;
+}
+
+ul {
+    list-style-type: disc;
+    padding-left: 20px;
+}
+
+ul li {
+    font-size: 1.1em;
+    margin-bottom: 10px;
+}
+
+a {
+    color: #ff8c00; /* Enlaces en color naranja */
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
 }
